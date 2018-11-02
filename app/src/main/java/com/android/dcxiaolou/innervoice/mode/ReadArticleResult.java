@@ -8,7 +8,7 @@ import java.util.List;
  * 对阅读模块下的文章返回的json文件进行处理，便于使用Gson进行解析
  * */
 
-public class ReadArticleResult extends LitePalSupport {
+public class ReadArticleResult {
 
 
     /**

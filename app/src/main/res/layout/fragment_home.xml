@@ -222,16 +222,15 @@
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:padding="10dp"
-                android:text="书籍推荐"
+                android:text="课程推荐"
                 android:textColor="@color/title_black"
                 android:textSize="14sp" />
 
-            <ImageView
-                android:id="@+id/recommended_company"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/daily_best_rv"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:scaleType="fitXY" />
-
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"/>
 
             <TextView
                 style="@style/width_match_height_wrap"
@@ -245,15 +244,11 @@
                 android:textColor="@color/title_black"
                 android:textSize="14sp" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/daily_best_rv"
+            <ImageView
+                android:id="@+id/recommended_company"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp">
-
-
-
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="160dp"
+                android:scaleType="fitXY" />
 
         </LinearLayout>
     </ScrollView>
