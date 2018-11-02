@@ -245,13 +245,16 @@
                 android:textColor="@color/title_black"
                 android:textSize="14sp" />
 
-            <ListView
-                android:id="@+id/industry_information_lv"
-                style="@style/width_match_height_wrap"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:divider="#ECECEC"
-                android:dividerHeight="1px" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/daily_best_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp">
+
+
+
+            </android.support.v7.widget.RecyclerView>
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

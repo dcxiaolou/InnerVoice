@@ -1,10 +1,17 @@
 package com.android.dcxiaolou.innervoice;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 
@@ -13,6 +20,8 @@ import com.android.dcxiaolou.innervoice.fragemnt.CenterFragment;
 import com.android.dcxiaolou.innervoice.fragemnt.HomeFragment;
 import com.android.dcxiaolou.innervoice.fragemnt.MessageFragment;
 import com.android.dcxiaolou.innervoice.fragemnt.TreeHoleFragment;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +46,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //布局 ViewGroup + RadioGroup + RadioButton
 
         // 初始化BmobSDK
-        Bmob.initialize(this, "bb6b2f6c06b678c60419c29dd24ef1c4");
+        Bmob.initialize(this, "35c39c93bd729b73efb27f9d8df9e72d");
+        //使用litepal操作数据库
+        SQLiteDatabase db = LitePal.getDatabase();
 
         //初始化界面
         initView();
 
         //初始化数据
         initData();
+
+        permissionRequest();
+    }
+
+    private void permissionRequest() {
+
+        //SD卡读写权限申请
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        }
+
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+        }
+
     }
 
     private void initData() {
@@ -132,4 +160,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onPageScrollStateChanged(int i) {
 
     }
+
+
+    //SD卡读写权限申请响应
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("TAG", "read permission");
+                } else {
+                    Log.d("TAG", "filed read permission");
+                }
+                break;
+            case 2:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("TAG", "write permission");
+                } else {
+                    Log.d("TAG", "filed write permission");
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
 }
