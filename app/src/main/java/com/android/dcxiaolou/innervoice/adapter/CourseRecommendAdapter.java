@@ -1,6 +1,8 @@
 package com.android.dcxiaolou.innervoice.adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.dcxiaolou.innervoice.ShowCourseIntroduce;
 import com.android.dcxiaolou.innervoice.R;
 import com.android.dcxiaolou.innervoice.mode.CourseGuide;
 import com.bumptech.glide.Glide;
@@ -21,12 +24,13 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
+        CardView courseItemCardView;
         ImageView courseCover;
         TextView courseText, courseJoinNum;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            courseItemCardView = (CardView) itemView.findViewById(R.id.course_item_card_view);
             courseCover = (ImageView) itemView.findViewById(R.id.course_cover);
             courseText = (TextView) itemView.findViewById(R.id.course_title);
             courseJoinNum = (TextView) itemView.findViewById(R.id.course_join_num);
@@ -41,9 +45,19 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
 
     @NonNull
     @Override
-    public CourseRecommendAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public CourseRecommendAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.course_guide_item, viewGroup, false);
-        ViewHolder holder = new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.courseItemCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                CourseGuide courseGuide = courseGuides.get(position);
+                Intent intent = new Intent(viewGroup.getContext(), ShowCourseIntroduce.class);
+                intent.putExtra(ShowCourseIntroduce.COURCE_ID, courseGuide.getId());
+                viewGroup.getContext().startActivity(intent);
+            }
+        });
         return holder;
     }
 

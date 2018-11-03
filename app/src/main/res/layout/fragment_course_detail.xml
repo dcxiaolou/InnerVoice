@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--课程简介界面的碎片，用来显示课程详细信息-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/root_bg_color">
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@+id/course_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:textSize="16sp"
+        android:background="@color/white"/>
+
+</LinearLayout>
