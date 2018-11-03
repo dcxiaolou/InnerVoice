@@ -1,7 +1,6 @@
 package com.android.dcxiaolou.innervoice.fragemnt;
 
 import android.content.Context;
-import android.content.RestrictionsManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -15,13 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.ListView;
 
 import com.android.dcxiaolou.innervoice.R;
 import com.android.dcxiaolou.innervoice.adapter.CourseRecommendAdapter;
+import com.android.dcxiaolou.innervoice.adapter.DailyBestAdapter;
 import com.android.dcxiaolou.innervoice.mode.ADBanner;
 import com.android.dcxiaolou.innervoice.mode.CourseCollect;
 import com.android.dcxiaolou.innervoice.mode.CourseGuide;
+import com.android.dcxiaolou.innervoice.mode.ReadArticle;
+import com.android.dcxiaolou.innervoice.mode.ReadArticleResult;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.youth.banner.Banner;
@@ -63,6 +65,9 @@ public class HomeFragment extends Fragment implements OnBannerListener {
     private RecyclerView recyclerView;
     private List<CourseGuide> courseGuides;
 
+    private ListView dailyBestLv;
+    private  List<ReadArticleResult> readArticleResults;
+
     // 创建view
     @Nullable
     @Override
@@ -82,11 +87,30 @@ public class HomeFragment extends Fragment implements OnBannerListener {
         mAdBanner = (Banner) mRootView.findViewById(R.id.adbanner);
         recyclerView = (RecyclerView) mRootView.findViewById(R.id.daily_best_rv);
 
-        //请求后台数据 从bmob获取banner图片，并用banner展示
+        // 请求后台数据 从bmob获取banner图片，并用banner展示
         requestHomeBanner();
 
-        //课程推荐模块 采用RecyclerView来显示
+        // 课程推荐模块 采用RecyclerView来显示
         initReadArticles(); //初始化内容
+
+        // 每日精选模块 采用ListView来显示
+        initDailyBest();
+
+    }
+
+    // banner的点击响应事件，下标从0开始
+    @Override
+    public void OnBannerClick(int position) {
+
+    }
+
+    //重写banner图片加载器
+    public class GlideImageLoader extends ImageLoader {
+
+        @Override
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            Glide.with(context).load(path).into(imageView);
+        }
     }
 
     private void requestHomeBanner() {
@@ -181,19 +205,70 @@ public class HomeFragment extends Fragment implements OnBannerListener {
         });
     }
 
-    // banner的点击响应事件，下标从0开始
-    @Override
-    public void OnBannerClick(int position) {
+    private void initDailyBest() {
+        readArticleResults = new ArrayList<>();
+        BmobQuery<ReadArticle> query = new BmobQuery<>();
+        query.addQueryKeys("article");
+        query.setLimit(5); // 返回5条数据
+        query.findObjects(new FindListener<ReadArticle>() {
+            @Override
+            public void done(List<ReadArticle> list, BmobException e) {
+                if (e == null) {
+                    Log.d(TAG, "dailyBestLv size = " + list.size());
+                    BmobFile file;
+                    for (ReadArticle readArticle : list) {
+                        file = readArticle.getBmobFile();
+                        if (file != null) {
+                            String fileUrl = file.getUrl();
+                            String fileName = file.getFilename();
+                            Log.d(TAG, fileName);
+                            // 使用okhttp获取相应得文章
+                            OkHttpClient client = new OkHttpClient();
+                            Request request = new Request.Builder().url(fileUrl).build();
+                            client.newCall(request).enqueue(new Callback() {
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                    e.printStackTrace();
+                                }
 
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    String result = response.body().string();
+                                    Log.d(TAG, result);
+                                    // 使用Gson解析返回的json数据
+                                    Gson gson = new Gson();
+                                    ReadArticleResult readArticleResult = gson.fromJson(result, ReadArticleResult.class);
+                                    readArticleResults.add(readArticleResult);
+                                }
+                            });
+                        } else {
+                            Log.d(TAG, "dailyBestLv bmobFile is null");
+                        }
+                    }
+
+                    showDailyBest(readArticleResults); //展示每日精选模块
+
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
-    //重写banner图片加载器
-    public class GlideImageLoader extends ImageLoader {
-
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
-            Glide.with(context).load(path).into(imageView);
-        }
+    private void showDailyBest(final List<ReadArticleResult> readArticleResults) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000); // 让主线程等待1s，以便获取相关数据
+                    Log.d(TAG, "showDailyBest size = " + readArticleResults.size());
+                    dailyBestLv = (ListView) mRootView.findViewById(R.id.daily_best);
+                    dailyBestLv.setAdapter(new DailyBestAdapter(readArticleResults, mComtext));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 

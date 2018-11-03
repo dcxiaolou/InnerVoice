@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/root_bg_color">
 
     <ScrollView
@@ -20,36 +21,36 @@
             <com.youth.banner.Banner
                 android:id="@+id/adbanner"
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="200dp"
                 app:image_scale_type="fit_xy"
-                app:scroll_time="1000"
-                app:indicator_drawable_selected="@drawable/dimension_indicator_selected">
+                app:indicator_drawable_selected="@drawable/dimension_indicator_selected"
+                app:scroll_time="1000">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:padding="5dp"
-                    android:background="@drawable/corner_search_bg">
+                    android:background="@drawable/corner_search_bg"
+                    android:padding="5dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/search_icon"/>
+                        android:src="@drawable/search_icon" />
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="搜索话题、专家姓名"/>
+                        android:layout_weight="1"
+                        android:text="搜索话题、专家姓名" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/search_call_phone"/>
+                        android:src="@drawable/search_call_phone" />
 
                 </LinearLayout>
 
@@ -63,158 +64,157 @@
                 app:cardElevation="1dp">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                        android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:id="@+id/labour_service"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="3dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        <LinearLayout
+                            android:id="@+id/labour_service"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingBottom="3dp">
 
-                        <ImageView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="6.7dp"
-                            android:src="@drawable/labour_icon" />
+                            <ImageView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="6.7dp"
+                                android:src="@drawable/labour_icon" />
 
-                        <TextView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="咨询"
-                            android:textColor="@color/title_black"
-                            android:textSize="14sp" />
+                            <TextView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="咨询"
+                                android:textColor="@color/title_black"
+                                android:textSize="14sp" />
 
-                    </LinearLayout>
+                        </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/insurance_view"
-                        style="@style/height_wrap_width_weight"
-                        android:layout_marginLeft="1dp"
-                        android:paddingBottom="3dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        <LinearLayout
+                            android:id="@+id/insurance_view"
+                            style="@style/height_wrap_width_weight"
+                            android:layout_marginLeft="1dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingBottom="3dp">
 
-                        <ImageView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="7dp"
-                            android:src="@drawable/insurance_icon" />
+                            <ImageView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:src="@drawable/insurance_icon" />
 
-                        <TextView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="阅读"
-                            android:textColor="@color/title_black"
-                            android:textSize="14sp" />
+                            <TextView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="阅读"
+                                android:textColor="@color/title_black"
+                                android:textSize="14sp" />
 
-                    </LinearLayout>
-
-
-
-                    <LinearLayout
-                        android:id="@+id/technology_view"
-                        style="@style/height_wrap_width_weight"
-                        android:layout_marginLeft="1dp"
-                        android:paddingBottom="3dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="7dp"
-                            android:src="@drawable/technology_icon" />
-
-                        <TextView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="问答"
-                            android:textColor="@color/title_black"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                        </LinearLayout>
 
 
-                </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/technology_view"
+                            style="@style/height_wrap_width_weight"
+                            android:layout_marginLeft="1dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingBottom="3dp">
 
-                <LinearLayout
-                    style="@style/width_match_height_wrap"
-                    android:layout_marginTop="1dp">
+                            <ImageView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:src="@drawable/technology_icon" />
 
-                    <LinearLayout
-                        android:id="@+id/equipment_view"
-                        style="@style/height_wrap_width_weight"
-                        android:paddingBottom="3dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                            <TextView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="问答"
+                                android:textColor="@color/title_black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                        <ImageView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:contentDescription="@string/app_name"
-                            android:src="@drawable/equipment_icon" />
-
-                        <TextView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="测试"
-                            android:textColor="@color/title_black"
-                            android:textSize="14sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/league_view"
-                        style="@style/height_wrap_width_weight"
-                        android:layout_marginLeft="1dp"
-                        android:paddingBottom="3dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        style="@style/width_match_height_wrap"
+                        android:layout_marginTop="1dp">
 
-                        <ImageView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="7dp"
-                            android:contentDescription="@string/app_name"
-                            android:src="@drawable/league_icon" />
+                        <LinearLayout
+                            android:id="@+id/equipment_view"
+                            style="@style/height_wrap_width_weight"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingBottom="3dp">
 
-                        <TextView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="课程"
-                            android:textColor="@color/title_black"
-                            android:textSize="14sp" />
+                            <ImageView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/equipment_icon" />
+
+                            <TextView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="测试"
+                                android:textColor="@color/title_black"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/league_view"
+                            style="@style/height_wrap_width_weight"
+                            android:layout_marginLeft="1dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingBottom="3dp">
+
+                            <ImageView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/league_icon" />
+
+                            <TextView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="课程"
+                                android:textColor="@color/title_black"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/cost_comm"
+                            style="@style/height_wrap_width_weight"
+                            android:layout_marginLeft="1dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:paddingBottom="3dp">
+
+                            <ImageView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/cost_exchange" />
+
+                            <TextView
+                                style="@style/wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="FM"
+                                android:textColor="@color/title_black"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/cost_comm"
-                        style="@style/height_wrap_width_weight"
-                        android:layout_marginLeft="1dp"
-                        android:paddingBottom="3dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="7dp"
-                            android:contentDescription="@string/app_name"
-                            android:src="@drawable/cost_exchange" />
-
-                        <TextView
-                            style="@style/wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="FM"
-                            android:textColor="@color/title_black"
-                            android:textSize="14sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
 
                 </LinearLayout>
 
@@ -238,7 +238,7 @@
                 android:id="@+id/daily_best_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"/>
+                android:layout_marginTop="1dp" />
 
             <TextView
                 style="@style/width_match_height_wrap"
@@ -252,12 +252,18 @@
                 android:textColor="@color/title_black"
                 android:textSize="14sp" />
 
-            <ImageView
-                android:id="@+id/recommended_company"
+            <!--android:dividerHeight="10px" 子项之间的间隔高度-->
+            <com.android.dcxiaolou.innervoice.defineUI.ImplantListView
+                android:id="@+id/daily_best"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:scaleType="fitXY" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:scrollbars="none"
+                android:divider="@color/gray"
+                android:dividerHeight="20px"/>
 
         </LinearLayout>
+
     </ScrollView>
+
 </RelativeLayout>

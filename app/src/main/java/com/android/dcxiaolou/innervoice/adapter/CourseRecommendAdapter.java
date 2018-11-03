@@ -42,7 +42,7 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
     @NonNull
     @Override
     public CourseRecommendAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.course_guide, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.course_guide_item, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
