@@ -20,7 +20,8 @@
             <com.youth.banner.Banner
                 android:id="@+id/adbanner"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="210dp"
+                app:image_scale_type="fit_xy"
                 app:scroll_time="1000"
                 app:indicator_drawable_selected="@drawable/dimension_indicator_selected">
 
@@ -54,163 +55,170 @@
 
             </com.youth.banner.Banner>
 
-            <LinearLayout
-                android:orientation="vertical"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/corner_second_menu_bg">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_margin="10dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="1dp">
 
                 <LinearLayout
-                    android:id="@+id/labour_service"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingBottom="3dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="6.7dp"
-                        android:src="@drawable/labour_icon" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="咨询"
-                        android:textColor="@color/title_black"
-                        android:textSize="14sp" />
+                    <LinearLayout
+                        android:id="@+id/labour_service"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingBottom="3dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="6.7dp"
+                            android:src="@drawable/labour_icon" />
+
+                        <TextView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="咨询"
+                            android:textColor="@color/title_black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/insurance_view"
+                        style="@style/height_wrap_width_weight"
+                        android:layout_marginLeft="1dp"
+                        android:paddingBottom="3dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:src="@drawable/insurance_icon" />
+
+                        <TextView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="阅读"
+                            android:textColor="@color/title_black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/technology_view"
+                        style="@style/height_wrap_width_weight"
+                        android:layout_marginLeft="1dp"
+                        android:paddingBottom="3dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:src="@drawable/technology_icon" />
+
+                        <TextView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="问答"
+                            android:textColor="@color/title_black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/insurance_view"
-                    style="@style/height_wrap_width_weight"
-                    android:layout_marginLeft="1dp"
-                    android:paddingBottom="3dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    style="@style/width_match_height_wrap"
+                    android:layout_marginTop="1dp">
 
-                    <ImageView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="7dp"
-                        android:src="@drawable/insurance_icon" />
+                    <LinearLayout
+                        android:id="@+id/equipment_view"
+                        style="@style/height_wrap_width_weight"
+                        android:paddingBottom="3dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                    <TextView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="阅读"
-                        android:textColor="@color/title_black"
-                        android:textSize="14sp" />
+                        <ImageView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/equipment_icon" />
 
-                </LinearLayout>
+                        <TextView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="测试"
+                            android:textColor="@color/title_black"
+                            android:textSize="14sp" />
 
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/league_view"
+                        style="@style/height_wrap_width_weight"
+                        android:layout_marginLeft="1dp"
+                        android:paddingBottom="3dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/technology_view"
-                    style="@style/height_wrap_width_weight"
-                    android:layout_marginLeft="1dp"
-                    android:paddingBottom="3dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                        <ImageView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/league_icon" />
 
-                    <ImageView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="7dp"
-                        android:src="@drawable/technology_icon" />
+                        <TextView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="课程"
+                            android:textColor="@color/title_black"
+                            android:textSize="14sp" />
 
-                    <TextView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="问答"
-                        android:textColor="@color/title_black"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/cost_comm"
+                        style="@style/height_wrap_width_weight"
+                        android:layout_marginLeft="1dp"
+                        android:paddingBottom="3dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-            </LinearLayout>
+                        <ImageView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/cost_exchange" />
 
-            <LinearLayout
-                style="@style/width_match_height_wrap"
-                android:layout_marginTop="1dp">
+                        <TextView
+                            style="@style/wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="FM"
+                            android:textColor="@color/title_black"
+                            android:textSize="14sp" />
 
-                <LinearLayout
-                    android:id="@+id/equipment_view"
-                    style="@style/height_wrap_width_weight"
-                    android:paddingBottom="3dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:contentDescription="@string/app_name"
-                        android:src="@drawable/equipment_icon" />
-
-                    <TextView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="测试"
-                        android:textColor="@color/title_black"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/league_view"
-                    style="@style/height_wrap_width_weight"
-                    android:layout_marginLeft="1dp"
-                    android:paddingBottom="3dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="7dp"
-                        android:contentDescription="@string/app_name"
-                        android:src="@drawable/league_icon" />
-
-                    <TextView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="课程"
-                        android:textColor="@color/title_black"
-                        android:textSize="14sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/cost_comm"
-                    style="@style/height_wrap_width_weight"
-                    android:layout_marginLeft="1dp"
-                    android:paddingBottom="3dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="7dp"
-                        android:contentDescription="@string/app_name"
-                        android:src="@drawable/cost_exchange" />
-
-                    <TextView
-                        style="@style/wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="FM"
-                        android:textColor="@color/title_black"
-                        android:textSize="14sp" />
-
                 </LinearLayout>
 
-            </LinearLayout>
-
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
             <View style="@style/gray_line" />
 

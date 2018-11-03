@@ -22,7 +22,7 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView courseCover;
-        TextView courseText, courseJoinNum, courseTeacherName;
+        TextView courseText, courseJoinNum;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -30,7 +30,6 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
             courseCover = (ImageView) itemView.findViewById(R.id.course_cover);
             courseText = (TextView) itemView.findViewById(R.id.course_title);
             courseJoinNum = (TextView) itemView.findViewById(R.id.course_join_num);
-            courseTeacherName = (TextView) itemView.findViewById(R.id.course_teacher_name);
 
         }
     }
@@ -54,8 +53,6 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
         Glide.with(viewHolder.itemView).load(courseGuide.getCover()).into(viewHolder.courseCover);
         viewHolder.courseText.setText(courseGuide.getTitle());
         viewHolder.courseJoinNum.setText(courseGuide.getJoinnum());
-        viewHolder.courseTeacherName.setText(courseGuide.getTeacherName());
-
     }
 
     @Override

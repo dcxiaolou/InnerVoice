@@ -1,6 +1,7 @@
 package com.android.dcxiaolou.innervoice.fragemnt;
 
 import android.content.Context;
+import android.content.RestrictionsManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.android.dcxiaolou.innervoice.R;
 import com.android.dcxiaolou.innervoice.adapter.CourseRecommendAdapter;
@@ -167,8 +169,8 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                 try {
                     Thread.sleep(1000); // 让主线程等待1s，以便获取相关数据
                     // Log.d(TAG, "courseGuides size = " + courseGuides.size());
-                    GridLayoutManager manager = new GridLayoutManager(mComtext, 2);
-                    manager.setOrientation(LinearLayoutManager.VERTICAL);
+                    GridLayoutManager manager = new GridLayoutManager(mComtext, 1);
+                    manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recyclerView.setLayoutManager(manager);
                     CourseRecommendAdapter adapter = new CourseRecommendAdapter(courseGuides);
                     recyclerView.setAdapter(adapter);

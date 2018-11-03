@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--自定义属性的声明 用于自定义控件-->
+<resources>
+    <declare-styleable name="ProportionImageView">
+        <attr name="widthProportion" format="float"/>
+        <attr name="heightProportion" format="float"/>
+    </declare-styleable>
+</resources>
