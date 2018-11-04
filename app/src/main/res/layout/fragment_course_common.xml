@@ -7,11 +7,9 @@
     android:layout_height="match_parent"
     android:background="@color/root_bg_color">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/course_common_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="18dp"
-        android:text="评论"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

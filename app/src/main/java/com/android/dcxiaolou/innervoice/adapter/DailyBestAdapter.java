@@ -38,37 +38,41 @@ public class DailyBestAdapter extends BaseAdapter {
         return position;
     }
 
-    // getView()方法每次都将布局重新加载一遍
+    /*getView()方法每次都将布局重新加载一遍
+    * 优化：第一个是优化加载布局view，第二个是优化加载控件viewHolder。
+    * */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        View view;
         ViewHolder viewHolder;
         if (convertView == null) { // 如果convertView为null，则重新加载布局 可以提高ListView的运行效率
-            convertView = View.inflate(mContext, R.layout.daily_best_item, null);
+            view = View.inflate(mContext, R.layout.daily_best_item, null);
             viewHolder = new ViewHolder();
-            viewHolder.dailyBestImage = convertView.findViewById(R.id.daily_best_image);
-            viewHolder.dailyBestTitle = convertView.findViewById(R.id.daily_best_title);
-            viewHolder.dailyBestDescribe = convertView.findViewById(R.id.daily_best_describe);
-            viewHolder.dailyBestPushTime = convertView.findViewById(R.id.daily_best_push_time);
-            viewHolder.dailyBestDigg = convertView.findViewById(R.id.daily_best_digg);
-            viewHolder.dailyBestView = convertView.findViewById(R.id.daily_best_view);
-            convertView.setTag(viewHolder); // 将viewHolder存储到convertView中
+            viewHolder.dailyBestImage = view.findViewById(R.id.daily_best_image);
+            viewHolder.dailyBestTitle = view.findViewById(R.id.daily_best_title);
+            viewHolder.dailyBestDescribe = view.findViewById(R.id.daily_best_describe);
+            viewHolder.dailyBestPushTime = view.findViewById(R.id.daily_best_push_time);
+            viewHolder.dailyBestDigg = view.findViewById(R.id.daily_best_digg);
+            viewHolder.dailyBestView = view.findViewById(R.id.daily_best_view);
+            view.setTag(viewHolder); // 将viewHolder存储到convertView中
         } else { // 不为空，直接对convertView进行重用
-            viewHolder = (ViewHolder) convertView.getTag();
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag(); // 从新获取viewHolder
         }
 
         ReadArticleResult readArticleResult = readArticleResults.get(position);
-        Glide.with(convertView).load(readArticleResult.getImage()).into(viewHolder.dailyBestImage);
+        Glide.with(view).load(readArticleResult.getImage()).into(viewHolder.dailyBestImage);
         viewHolder.dailyBestTitle.setText(readArticleResult.getTitle());
         viewHolder.dailyBestDescribe.setText(readArticleResult.getDescribe());
         viewHolder.dailyBestPushTime.setText(readArticleResult.getPush_time());
         viewHolder.dailyBestDigg.setText(readArticleResult.getLike().get(0));
         viewHolder.dailyBestView.setText(readArticleResult.getCount());
 
-        return convertView;
+        return view;
     }
 
     public static class ViewHolder {
-        public ImageView dailyBestImage;
-        public TextView dailyBestTitle, dailyBestDescribe, dailyBestPushTime, dailyBestDigg, dailyBestView;
+        ImageView dailyBestImage;
+        TextView dailyBestTitle, dailyBestDescribe, dailyBestPushTime, dailyBestDigg, dailyBestView;
     }
 }
