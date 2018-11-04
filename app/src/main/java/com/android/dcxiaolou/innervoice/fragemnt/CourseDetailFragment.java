@@ -42,7 +42,7 @@ public class CourseDetailFragment extends Fragment {
 
     private final static String TAG = "CourseDetailFragment";
 
-    private String courseId;
+    private String courseId, coverPath;
 
     private Context mContext;
     private View mRootView;
@@ -65,7 +65,7 @@ public class CourseDetailFragment extends Fragment {
         courseDetail = (HtmlTextView) mRootView.findViewById(R.id.course_detail);
         SharedPreferences sp = mContext.getSharedPreferences("info", Context.MODE_PRIVATE);
         courseId = sp.getString("courseId", null);
-        Log.d(TAG, "courseId" + courseId);
+        Log.d(TAG, "courseId " + courseId);
         // 从bmob查询该课程id为courseId的json文件的url
         getJsonForCourseIntroduce(courseId);
     }

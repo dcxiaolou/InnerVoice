@@ -8,12 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.android.dcxiaolou.innervoice.adapter.FragmentAdapter;
 import com.android.dcxiaolou.innervoice.fragemnt.CourseCatalogFragment;
 import com.android.dcxiaolou.innervoice.fragemnt.CourseCommonFragment;
 import com.android.dcxiaolou.innervoice.fragemnt.CourseDetailFragment;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,30 +27,40 @@ import java.util.List;
 public class ShowCourseIntroduce extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private static final String TAG = "ShowCourseIntroduce";
+
     public static final String COURCE_ID = "course_id";
+    public static final String COVER_PATH = "cover_path";
+
+    private ImageView coverImageView;
 
     private RadioButton detailRb, catalogRb, commonRb;
 
     private ViewPager viewPagerl;
 
-    private String courseId;
+    private String courseId, coverPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_introduce);
 
-        initView();
-
-        initData();
         // 获取courseId，并将其用SharePreferences保存到文件中
         courseId = getIntent().getStringExtra(COURCE_ID);
+        coverPath = getIntent().getStringExtra(COVER_PATH);
         SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
         sp.edit().putString("courseId", courseId).apply();
         // Log.d(TAG, courseId);
+        // Log.d(TAG, coverPath);
+
+        initView();
+
+        initData();
+
     }
 
     private void initView() {
+        coverImageView = (ImageView) findViewById(R.id.cover_image);
+
         detailRb = (RadioButton) findViewById(R.id.rb_detail);
         catalogRb = (RadioButton) findViewById(R.id.rb_catalog);
         commonRb = (RadioButton) findViewById(R.id.rb_common);
@@ -63,6 +75,9 @@ public class ShowCourseIntroduce extends AppCompatActivity implements View.OnCli
     }
 
     private void initData() {
+        // 使用glide加载课程封面
+        Glide.with(this).load(coverPath).into(coverImageView);
+
         // 给ViewGroup设置适配器
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new CourseDetailFragment());

@@ -1,66 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--课程简介界面-->
-
+<?xml version="1.0" encoding="utf-8"?><!--课程简介界面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:dc="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/root_bg_color">
+    android:background="@color/root_bg_color"
+    android:orientation="vertical">
+
+    <com.android.dcxiaolou.innervoice.defineUI.ProportionImageView
+        android:id="@+id/cover_image"
+        android:layout_width="match_parent"
+        android:layout_margin="3dp"
+        android:layout_height="0dp"
+        dc:heightProportion="9"
+        dc:widthProportion="16" />
 
     <RadioGroup
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-        
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
         <RadioButton
             android:id="@+id/rb_detail"
-            android:button="@null"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
             android:drawableBottom="@drawable/course_introduce_rb"
             android:drawablePadding="2dp"
+            android:gravity="center"
             android:text="详情"
-            android:checked="true"
-            android:textStyle="bold"
             android:textColor="@color/rb_text_color"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/rb_catalog"
-            android:button="@null"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
             android:drawableBottom="@drawable/course_introduce_rb"
             android:drawablePadding="3dp"
+            android:gravity="center"
             android:text="目录"
             android:textColor="@color/rb_text_color"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/rb_common"
-            android:button="@null"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
             android:drawableBottom="@drawable/course_introduce_rb"
             android:drawablePadding="3dp"
+            android:gravity="center"
             android:text="评论"
             android:textColor="@color/rb_text_color"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
-        
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
     </RadioGroup>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

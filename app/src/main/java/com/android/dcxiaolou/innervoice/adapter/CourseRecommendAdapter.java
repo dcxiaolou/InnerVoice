@@ -40,7 +40,6 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
 
     public CourseRecommendAdapter(List<CourseGuide> courseGuides) {
         this.courseGuides = courseGuides;
-        this.courseGuides = courseGuides;
     }
 
     @NonNull
@@ -55,6 +54,7 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
                 CourseGuide courseGuide = courseGuides.get(position);
                 Intent intent = new Intent(viewGroup.getContext(), ShowCourseIntroduce.class);
                 intent.putExtra(ShowCourseIntroduce.COURCE_ID, courseGuide.getId());
+                intent.putExtra(ShowCourseIntroduce.COVER_PATH, courseGuide.getCover());
                 viewGroup.getContext().startActivity(intent);
             }
         });
