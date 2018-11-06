@@ -5,91 +5,107 @@
     android:background="@color/root_bg_color">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/article_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:text="答疑 | 为什么家长舍得把孩子送去戒网中心被强迫电击？"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:textColor="@color/default_text_color"
-            android:textStyle="bold"
-            android:textSize="16sp"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/article_tag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
+            android:orientation="vertical"
+            android:background="@color/white">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/article_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="答疑 | 为什么家长舍得把孩子送去戒网中心被强迫电击？"
                 android:textColor="@color/default_text_color"
-                android:text="发布时间:"
-                android:textSize="14sp"
-                android:paddingRight="5dp"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/article_push_time"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/article_tag"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/default_text_color"
-                android:textSize="14sp"
-                android:text="2018-11-04"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
 
-            <TextView
-                android:id="@+id/article_read_num"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:drawableLeft="@drawable/view"
-                android:drawablePadding="5dp"
-                android:textColor="@color/default_text_color"
-                android:text="1765阅读"/>
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/article_digg_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:drawableLeft="@drawable/digg"
-                android:drawablePadding="5dp"
-                android:textColor="@color/default_text_color"
-                android:text="2赞" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="5dp"
+                    android:text="发布时间:"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/article_common_time"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/article_push_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2018-11-04"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/article_read_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/view"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="10dp"
+                    android:text="1765阅读"
+                    android:textColor="@color/default_text_color" />
+
+                <TextView
+                    android:id="@+id/article_like_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/digg"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="10dp"
+                    android:text="2赞"
+                    android:textColor="@color/default_text_color" />
+
+                <TextView
+                    android:id="@+id/article_common_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/reply"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="10dp"
+                    android:text="5评论"
+                    android:textColor="@color/default_text_color" />
+
+            </LinearLayout>
+
+            <org.sufficientlysecure.htmltextview.HtmlTextView
+                android:id="@+id/article_context"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:drawableLeft="@drawable/reply"
-                android:drawablePadding="5dp"
-                android:textColor="@color/default_text_color"
-                android:text="5评论"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp" />
+
 
         </LinearLayout>
-
-        <org.sufficientlysecure.htmltextview.HtmlTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/article_common"
@@ -97,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp" />
 
     </LinearLayout>
 

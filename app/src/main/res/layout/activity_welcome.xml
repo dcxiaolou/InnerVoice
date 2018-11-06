@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/welcome_iv"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/welcome"/>
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/welcome_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/welcome"/>
+
+    <com.android.dcxiaolou.innervoice.defineUI.CountDownProgressBar
+        android:id="@+id/cpb_countdown"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        app:countDown_centerTextColor="#4169E1"
+        app:countDown_centerTextSize="18dp"
+        app:countDown_circleWidth="2dp"
+        app:countDown_firstColor="#778899"
+        app:countDown_isShowGradient="true"
+        app:countDown_secondColor="#00f" />
+
+</FrameLayout>

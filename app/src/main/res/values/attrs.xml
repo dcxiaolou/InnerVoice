@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--自定义属性的声明 用于自定义控件-->
 <resources>
+
+    <!--根据图片的高宽比显示图片-->
     <declare-styleable name="ProportionImageView">
         <attr name="widthProportion" format="float"/>
         <attr name="heightProportion" format="float"/>
     </declare-styleable>
+    <!--显示倒计时进度条-->
+    <declare-styleable name="CountDownProgressBar">
+        <attr name="countDown_circleWidth" format="dimension" />
+        <attr name="countDown_centerTextSize" format="dimension" />
+        <attr name="countDown_betaAngle" format="integer" />
+        <attr name="countDown_firstColor" format="color" />
+        <attr name="countDown_secondColor" format="color" />
+        <attr name="countDown_centerTextColor" format="color" />
+        <attr name="countDown_isShowGradient" format="boolean" />
+    </declare-styleable>
+
 </resources>
