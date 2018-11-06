@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.dcxiaolou.innervoice.mode.CourseDetail;
 import com.android.dcxiaolou.innervoice.mode.CourseDetailResult;
@@ -119,6 +120,10 @@ public class CoursePlay extends AppCompatActivity {
                 try {
                     Thread.sleep(1000); //停顿1s，以便获取数据
                     Log.d(TAG, "courseUrl = " + courseUrl);
+                    if (courseUrl == null) {
+                        Toast.makeText(mContext, "哎呀Σ( ° △ °|||)，视频不见了！", Toast.LENGTH_SHORT).show();
+                        return ;
+                    }
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder().url(courseUrl).build();
                     client.newCall(request).enqueue(new Callback() {
@@ -185,9 +190,6 @@ public class CoursePlay extends AppCompatActivity {
                         }
                     });
 
-                    final int imageHeight = imageView.getHeight();
-                    final int imageWidth = imageView.getWidth();
-
                     final int width = videoPlayer.getWidth();
                     final int height = videoPlayer.getHeight();
 
@@ -204,11 +206,11 @@ public class CoursePlay extends AppCompatActivity {
                                     parent.removeView(imageView);
                                     // 使用glide加载gif动画
                                     RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE);
-                                    options.override(400, 400);
+                                    options.override(500, 400);
                                     Glide.with(mContext).load(R.drawable.rotation).apply(options).into(imageView);
                                     videoPlayer.addView(imageView);
-                                    playBtn.setY(height - 120);
-                                    playBtn.setX(-imageWidth + 10);
+                                    playBtn.setY(height - 300);
+                                    playBtn.setX(20);
                                 }
                                 playState = 2;
                             } else if (playState == 2) { // 暂停
@@ -217,11 +219,11 @@ public class CoursePlay extends AppCompatActivity {
                                     ViewGroup parent = (ViewGroup) imageView.getParent();
                                     parent.removeView(imageView);
                                     RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE);
-                                    options.override(400, 400);
+                                    options.override(500, 400);
                                     Glide.with(mContext).load(courseCover).apply(options).into(imageView);
                                     videoPlayer.addView(imageView);
-                                    playBtn.setY(height - 120);
-                                    playBtn.setX(-imageWidth + 10);
+                                    playBtn.setY(height - 300);
+                                    playBtn.setX(20);
                                 }
                                 playBtn.setVisibility(View.VISIBLE);
                                 playState = 3;
@@ -232,11 +234,11 @@ public class CoursePlay extends AppCompatActivity {
                                     parent.removeView(imageView);
                                     // 使用glide加载gif动画
                                     RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE);
-                                    options.override(400, 400);
+                                    options.override(500, 400);
                                     Glide.with(mContext).load(R.drawable.rotation).apply(options).into(imageView);
                                     videoPlayer.addView(imageView);
-                                    playBtn.setY(height - 120);
-                                    playBtn.setX(-imageWidth + 10);
+                                    playBtn.setY(height - 300);
+                                    playBtn.setX(20);
                                 }
                                 playState = 2;
                             }

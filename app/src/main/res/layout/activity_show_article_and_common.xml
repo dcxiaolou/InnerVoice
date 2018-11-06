@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--阅读模块详情页（包括文章内容和评论）-->
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,21 +25,20 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="答疑 | 为什么家长舍得把孩子送去戒网中心被强迫电击？"
                 android:textColor="@color/default_text_color"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <android.support.v7.widget.RecyclerView
+            <LinearLayout
                 android:id="@+id/article_tag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp" />
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,16 +83,6 @@
                     android:drawablePadding="5dp"
                     android:paddingLeft="10dp"
                     android:text="2赞"
-                    android:textColor="@color/default_text_color" />
-
-                <TextView
-                    android:id="@+id/article_common_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/reply"
-                    android:drawablePadding="5dp"
-                    android:paddingLeft="10dp"
-                    android:text="5评论"
                     android:textColor="@color/default_text_color" />
 
             </LinearLayout>

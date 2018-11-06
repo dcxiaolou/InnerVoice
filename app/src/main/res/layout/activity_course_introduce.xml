@@ -9,7 +9,6 @@
     <com.android.dcxiaolou.innervoice.defineUI.ProportionImageView
         android:id="@+id/cover_image"
         android:layout_width="match_parent"
-        android:layout_margin="3dp"
         android:layout_height="0dp"
         dc:heightProportion="9"
         dc:widthProportion="16" />
