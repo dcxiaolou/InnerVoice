@@ -32,7 +32,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /*
-* 课程简介界面的评论页碎片
+* 课程推荐（简介）界面的评论页碎片
 * */
 
 public class CourseCommonFragment extends Fragment {

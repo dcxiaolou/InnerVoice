@@ -1,6 +1,7 @@
 package com.android.dcxiaolou.innervoice.fragemnt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -13,11 +14,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.android.dcxiaolou.innervoice.R;
-import com.android.dcxiaolou.innervoice.adapter.CourseRecommendAdapter;
+import com.android.dcxiaolou.innervoice.ShowArticleAndCommon;
+import com.android.dcxiaolou.innervoice.adapter.CourseIntroduceAdapter;
 import com.android.dcxiaolou.innervoice.adapter.DailyBestAdapter;
 import com.android.dcxiaolou.innervoice.mode.ADBanner;
 import com.android.dcxiaolou.innervoice.mode.CourseCollect;
@@ -47,10 +50,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /*
- * 主页
+ * 主页碎片
  * */
 
-public class HomeFragment extends Fragment implements OnBannerListener {
+public class HomeFragment extends Fragment implements OnBannerListener{
 
     private final static String TAG = "HomeFragment";
 
@@ -196,7 +199,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                     GridLayoutManager manager = new GridLayoutManager(mComtext, 1);
                     manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recyclerView.setLayoutManager(manager);
-                    CourseRecommendAdapter adapter = new CourseRecommendAdapter(courseGuides);
+                    CourseIntroduceAdapter adapter = new CourseIntroduceAdapter(courseGuides);
                     recyclerView.setAdapter(adapter);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -246,7 +249,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                         }
                     }
 
-                    showDailyBest(readArticleResults); //展示每日精选模块
+                    showDailyBest(readArticleResults, mComtext); //展示每日精选模块
 
                 } else {
                     e.printStackTrace();
@@ -255,7 +258,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
         });
     }
 
-    private void showDailyBest(final List<ReadArticleResult> readArticleResults) {
+    private void showDailyBest(final List<ReadArticleResult> readArticleResults, final Context mContext) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -264,12 +267,22 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                     Log.d(TAG, "showDailyBest size = " + readArticleResults.size());
                     dailyBestLv = (ListView) mRootView.findViewById(R.id.daily_best);
                     dailyBestLv.setAdapter(new DailyBestAdapter(readArticleResults, mComtext));
+                    //添加点击事件，用于跳转到文章的详情页
+                    dailyBestLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            ReadArticleResult articleResult = readArticleResults.get(position);
+                            Intent intent = new Intent(view.getContext(), ShowArticleAndCommon.class);
+                            //用Intent传递对象，该对象要实现Serializable（序列化）接口，将该对象转换成可存储或可传输的状态
+                            intent.putExtra(ShowArticleAndCommon.ARTICLE_DETAIL, articleResult);
+                            startActivity(intent);
+                        }
+                    });
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         });
     }
-
 
 }

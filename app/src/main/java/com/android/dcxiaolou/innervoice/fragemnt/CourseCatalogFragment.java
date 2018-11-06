@@ -31,7 +31,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /*
-* 课程简介界面的目录页碎片
+* 课程推荐（简介）界面的目录页碎片
 * */
 
 public class CourseCatalogFragment extends Fragment {

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.android.dcxiaolou.innervoice.R;
 
 /*
-* 信息页
+* 信息页碎片
 * */
 
 public class MessageFragment extends Fragment {

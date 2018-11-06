@@ -1,14 +1,15 @@
 package com.android.dcxiaolou.innervoice.mode;
 
-import org.litepal.crud.LitePalSupport;
-
+import java.io.Serializable;
 import java.util.List;
 
 /*
  * 对阅读模块下的文章返回的json文件进行处理，便于使用Gson进行解析
+ * Serializable 是序列化的意思，表示将一个对象转换成可存储或可传输的状态。
+ * 序列化后的对象可以在网络上进行传输，也可以存储到本地（可以实现Intent传递对象）
  * */
 
-public class ReadArticleResult {
+public class ReadArticleResult implements Serializable {
 
 
     /**

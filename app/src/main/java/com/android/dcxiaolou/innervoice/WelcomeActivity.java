@@ -8,6 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+/*
+* 欢迎页，便于主界面加载资源，避免出现黑屏
+* */
+
 //使用android:theme="@android:style/Theme.NoTitleBar.Fullscreen"（全屏）需要继承Activity
 public class WelcomeActivity extends Activity {
 

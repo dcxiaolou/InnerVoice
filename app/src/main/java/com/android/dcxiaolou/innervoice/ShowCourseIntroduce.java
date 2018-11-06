@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -21,15 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-* 课程简介界面展示
+* 课程推荐（简介）界面展示
 * */
 
 public class ShowCourseIntroduce extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private static final String TAG = "ShowCourseIntroduce";
 
-    public static final String COURCE_ID = "course_id";
+    public static final String COURSE_ID = "course_id";
     public static final String COVER_PATH = "cover_path";
+    public static final String COURSE_TITLE = "cover_title";
 
     private ImageView coverImageView;
 
@@ -37,18 +37,21 @@ public class ShowCourseIntroduce extends AppCompatActivity implements View.OnCli
 
     private ViewPager viewPagerl;
 
-    private String courseId, coverPath;
+    private String courseId, coverPath, courseTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_introduce);
 
-        // 获取courseId，并将其用SharePreferences保存到文件中
-        courseId = getIntent().getStringExtra(COURCE_ID);
+        // 获取courseId和coverPath，并将其用SharePreferences保存到文件中
+        courseId = getIntent().getStringExtra(COURSE_ID);
         coverPath = getIntent().getStringExtra(COVER_PATH);
+        courseTitle = getIntent().getStringExtra(COURSE_TITLE);
         SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
         sp.edit().putString("courseId", courseId).apply();
+        sp.edit().putString("courseCover", coverPath).apply();
+        sp.edit().putString("courseTitle", courseTitle).apply();
         // Log.d(TAG, courseId);
         // Log.d(TAG, coverPath);
 

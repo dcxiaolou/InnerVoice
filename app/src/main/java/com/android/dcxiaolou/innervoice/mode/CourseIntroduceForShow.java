@@ -2,8 +2,11 @@ package com.android.dcxiaolou.innervoice.mode;
 
 import java.util.List;
 
-public class CourseIntroduceForShow {
+/*
+* 用于课程推荐（简介）的显示
+* */
 
+public class CourseIntroduceForShow {
 
     private List<String> introduce;
 

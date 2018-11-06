@@ -6,7 +6,17 @@ package com.android.dcxiaolou.innervoice.mode;
 
 public class CourseIntroduceCatalog {
 
+    private int no; //当前课程中的第几个
+
     private String title, playPath, time, index;
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
 
     public String getTitle() {
         return title;

@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textAppearance="@android:style/TextAppearance.Small"
         android:textSize="16sp"
         android:background="@color/white"/>

@@ -21,8 +21,6 @@ import com.android.dcxiaolou.innervoice.fragemnt.HomeFragment;
 import com.android.dcxiaolou.innervoice.fragemnt.MessageFragment;
 import com.android.dcxiaolou.innervoice.fragemnt.TreeHoleFragment;
 
-import org.litepal.LitePal;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // 初始化BmobSDK
         Bmob.initialize(this, "35c39c93bd729b73efb27f9d8df9e72d");
-        //使用litepal操作数据库
-        SQLiteDatabase db = LitePal.getDatabase();
 
         //初始化界面
         initView();

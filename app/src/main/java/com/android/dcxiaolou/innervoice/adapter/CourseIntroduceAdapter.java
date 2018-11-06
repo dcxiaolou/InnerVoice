@@ -18,7 +18,11 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommendAdapter.ViewHolder> {
+/*
+* 课程推荐模块的适配器
+* */
+
+public class CourseIntroduceAdapter extends RecyclerView.Adapter<CourseIntroduceAdapter.ViewHolder> {
 
     private List<CourseGuide> courseGuides = new ArrayList<>();
 
@@ -38,13 +42,13 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
         }
     }
 
-    public CourseRecommendAdapter(List<CourseGuide> courseGuides) {
+    public CourseIntroduceAdapter(List<CourseGuide> courseGuides) {
         this.courseGuides = courseGuides;
     }
 
     @NonNull
     @Override
-    public CourseRecommendAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
+    public CourseIntroduceAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.course_guide_item, viewGroup, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.courseItemCardView.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +57,9 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
                 int position = holder.getAdapterPosition();
                 CourseGuide courseGuide = courseGuides.get(position);
                 Intent intent = new Intent(viewGroup.getContext(), ShowCourseIntroduce.class);
-                intent.putExtra(ShowCourseIntroduce.COURCE_ID, courseGuide.getId());
+                intent.putExtra(ShowCourseIntroduce.COURSE_ID, courseGuide.getId());
                 intent.putExtra(ShowCourseIntroduce.COVER_PATH, courseGuide.getCover());
+                intent.putExtra(ShowCourseIntroduce.COURSE_TITLE, courseGuide.getTitle());
                 viewGroup.getContext().startActivity(intent);
             }
         });
@@ -62,7 +67,7 @@ public class CourseRecommendAdapter extends RecyclerView.Adapter<CourseRecommend
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseRecommendAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull CourseIntroduceAdapter.ViewHolder viewHolder, int i) {
         CourseGuide courseGuide = courseGuides.get(i);
         Glide.with(viewHolder.itemView).load(courseGuide.getCover()).into(viewHolder.courseCover);
         viewHolder.courseText.setText(courseGuide.getTitle());

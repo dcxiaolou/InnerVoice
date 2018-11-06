@@ -1,7 +1,7 @@
 package com.android.dcxiaolou.innervoice.mode;
 
 /*
-* 课程汇总 包含所有课程的基本信息
+* 课程汇总 包含所有课程的基本信息（用于Gson解析json数据）
 * */
 
 import java.util.List;

@@ -2,6 +2,10 @@ package com.android.dcxiaolou.innervoice.mode;
 
 import java.util.List;
 
+/*
+* 用于课程简介模块的评论
+* */
+
 public class CourseIntroduceCommonResult {
 
 

@@ -1,6 +1,8 @@
 package com.android.dcxiaolou.innervoice.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,10 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.dcxiaolou.innervoice.R;
+import com.android.dcxiaolou.innervoice.ShowArticleAndCommon;
 import com.android.dcxiaolou.innervoice.mode.ReadArticleResult;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+
+/*
+* 每日精选模块的适配器（基于ListView）
+* */
 
 public class DailyBestAdapter extends BaseAdapter {
 
@@ -42,12 +49,13 @@ public class DailyBestAdapter extends BaseAdapter {
     * 优化：第一个是优化加载布局view，第二个是优化加载控件viewHolder。
     * */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view;
         ViewHolder viewHolder;
         if (convertView == null) { // 如果convertView为null，则重新加载布局 可以提高ListView的运行效率
             view = View.inflate(mContext, R.layout.daily_best_item, null);
             viewHolder = new ViewHolder();
+            viewHolder.dailyBestCv = view.findViewById(R.id.daily_best_cv);
             viewHolder.dailyBestImage = view.findViewById(R.id.daily_best_image);
             viewHolder.dailyBestTitle = view.findViewById(R.id.daily_best_title);
             viewHolder.dailyBestDescribe = view.findViewById(R.id.daily_best_describe);
@@ -72,6 +80,7 @@ public class DailyBestAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder {
+        CardView dailyBestCv;
         ImageView dailyBestImage;
         TextView dailyBestTitle, dailyBestDescribe, dailyBestPushTime, dailyBestDigg, dailyBestView;
     }

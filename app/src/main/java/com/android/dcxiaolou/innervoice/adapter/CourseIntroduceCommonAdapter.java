@@ -18,6 +18,10 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
+/*
+* 课程推荐（简介）模块的评论适配器
+* */
+
 public class CourseIntroduceCommonAdapter extends RecyclerView.Adapter<CourseIntroduceCommonAdapter.ViewHolder> {
 
     private Context mContext;

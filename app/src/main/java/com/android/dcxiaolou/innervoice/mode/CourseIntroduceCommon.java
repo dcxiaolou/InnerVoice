@@ -1,7 +1,7 @@
 package com.android.dcxiaolou.innervoice.mode;
 
 /*
-* 课程简介模块的评论
+* 课程简介模块的评论（用于Gson解析json数据）
 * */
 
 import java.util.List;

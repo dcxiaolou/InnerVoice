@@ -9,6 +9,10 @@ import android.widget.ImageView;
 
 import com.android.dcxiaolou.innervoice.R;
 
+/*
+* 自定义ImageView用来解决图片显示变形或不全，根据图片的宽高比显示图片
+* */
+
 public class ProportionImageView extends ImageView {
 
     private final static String TAG = "ProportionImageView";

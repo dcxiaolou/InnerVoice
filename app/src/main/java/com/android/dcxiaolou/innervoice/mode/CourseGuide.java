@@ -1,7 +1,7 @@
 package com.android.dcxiaolou.innervoice.mode;
 
 /*
-* 课程推荐模块的课程引导类 配合RecyclerView使用
+* 课程推荐模块的课程引导类 配合RecyclerView使用 （用于Gson解析json数据）
 * 提取内容： id：课程编号  title：标题  cover：封面  joinnum：加入课程的人数  teacherName：老师名称
 * */
 
