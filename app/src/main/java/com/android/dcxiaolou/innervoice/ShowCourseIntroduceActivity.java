@@ -23,9 +23,9 @@ import java.util.List;
 * 课程推荐（简介）界面展示
 * */
 
-public class ShowCourseIntroduce extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class ShowCourseIntroduceActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
-    private static final String TAG = "ShowCourseIntroduce";
+    private static final String TAG = "ShowCourseIntroduceActivity";
 
     public static final String COURSE_ID = "course_id";
     public static final String COVER_PATH = "cover_path";

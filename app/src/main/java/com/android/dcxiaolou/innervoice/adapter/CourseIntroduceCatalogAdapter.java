@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.android.dcxiaolou.innervoice.CoursePlay;
+import com.android.dcxiaolou.innervoice.CoursePlayActivity;
 import com.android.dcxiaolou.innervoice.R;
 import com.android.dcxiaolou.innervoice.mode.CourseIntroduceCatalog;
 
@@ -63,8 +63,8 @@ public class CourseIntroduceCatalogAdapter extends RecyclerView.Adapter<CourseIn
                 holder.coursePlay.setChecked(true);
                 Log.d(TAG, "position = " + position);
                 CourseIntroduceCatalog catalog = courseIntroduceCatalogs.get(position);
-                Intent intent = new Intent(mContext, CoursePlay.class);
-                intent.putExtra(CoursePlay.COURSE_NO, position); // 从0开始
+                Intent intent = new Intent(mContext, CoursePlayActivity.class);
+                intent.putExtra(CoursePlayActivity.COURSE_NO, position); // 从0开始
                 mContext.startActivity(intent);
             }
         });
@@ -75,8 +75,8 @@ public class CourseIntroduceCatalogAdapter extends RecyclerView.Adapter<CourseIn
                 holder.coursePlay.setChecked(true);
                 Log.d(TAG, "position = " + position);
                 CourseIntroduceCatalog catalog = courseIntroduceCatalogs.get(position);
-                Intent intent = new Intent(mContext, CoursePlay.class);
-                intent.putExtra(CoursePlay.COURSE_NO, position); // 从0开始
+                Intent intent = new Intent(mContext, CoursePlayActivity.class);
+                intent.putExtra(CoursePlayActivity.COURSE_NO, position); // 从0开始
                 mContext.startActivity(intent);
             }
         });

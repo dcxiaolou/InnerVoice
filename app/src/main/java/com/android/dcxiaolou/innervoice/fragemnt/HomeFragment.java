@@ -1,6 +1,7 @@
 package com.android.dcxiaolou.innervoice.fragemnt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -14,8 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.android.dcxiaolou.innervoice.CoursePlayActivity;
+import com.android.dcxiaolou.innervoice.MainActivity;
 import com.android.dcxiaolou.innervoice.R;
+import com.android.dcxiaolou.innervoice.ShowReadArticleActivity;
 import com.android.dcxiaolou.innervoice.adapter.CourseIntroduceAdapter;
 import com.android.dcxiaolou.innervoice.adapter.ReadArticleAdapter;
 import com.android.dcxiaolou.innervoice.mode.ADBanner;
@@ -49,7 +54,7 @@ import okhttp3.Response;
  * 主页碎片
  * */
 
-public class HomeFragment extends Fragment implements OnBannerListener{
+public class HomeFragment extends Fragment implements OnBannerListener, View.OnClickListener {
 
     private final static String TAG = "HomeFragment";
 
@@ -66,6 +71,9 @@ public class HomeFragment extends Fragment implements OnBannerListener{
 
     private RecyclerView dailyBestRv;
     private  List<ReadArticleResult> readArticleResults;
+
+    //子菜单项
+    private LinearLayout readLayout;
 
     // 创建view
     @Nullable
@@ -86,6 +94,8 @@ public class HomeFragment extends Fragment implements OnBannerListener{
         mAdBanner = (Banner) mRootView.findViewById(R.id.adbanner);
         recyclerView = (RecyclerView) mRootView.findViewById(R.id.daily_best_rv);
 
+        readLayout = (LinearLayout) mRootView.findViewById(R.id.readLayout);
+
         // 请求后台数据 从bmob获取banner图片，并用banner展示
         requestHomeBanner();
 
@@ -95,12 +105,26 @@ public class HomeFragment extends Fragment implements OnBannerListener{
         // 每日精选模块 采用ListView来显示
         initDailyBest();
 
+        //给子菜单项添加点击事件
+        readLayout.setOnClickListener(this);
+
     }
 
     // banner的点击响应事件，下标从0开始
     @Override
     public void OnBannerClick(int position) {
 
+    }
+
+    //子菜单项的点击事件处理
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.readLayout:
+                Intent intent = new Intent(mComtext, ShowReadArticleActivity.class);
+                mComtext.startActivity(intent);
+                break;
+        }
     }
 
     //重写banner图片加载器

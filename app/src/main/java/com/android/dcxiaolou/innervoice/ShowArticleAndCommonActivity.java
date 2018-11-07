@@ -20,9 +20,9 @@ import org.sufficientlysecure.htmltextview.HtmlTextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowArticleAndCommon extends AppCompatActivity {
+public class ShowArticleAndCommonActivity extends AppCompatActivity {
 
-    private final static String TAG = "ShowArticleAndCommon";
+    private final static String TAG = "ShowArticleAndCommonActivity";
     public final static String ARTICLE_DETAIL = "article_detail";
 
     private Handler mHandler = new Handler();

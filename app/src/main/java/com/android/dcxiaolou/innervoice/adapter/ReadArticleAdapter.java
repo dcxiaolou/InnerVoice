@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.dcxiaolou.innervoice.R;
-import com.android.dcxiaolou.innervoice.ShowArticleAndCommon;
+import com.android.dcxiaolou.innervoice.ShowArticleAndCommonActivity;
 import com.android.dcxiaolou.innervoice.mode.ReadArticleResult;
 import com.bumptech.glide.Glide;
 
@@ -64,9 +64,9 @@ public class ReadArticleAdapter extends RecyclerView.Adapter<ReadArticleAdapter.
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 ReadArticleResult articleResult = readArticleResults.get(position);
-                Intent intent = new Intent(viewGroup.getContext(), ShowArticleAndCommon.class);
+                Intent intent = new Intent(viewGroup.getContext(), ShowArticleAndCommonActivity.class);
                 //用Intent传递对象，该对象要实现Serializable（序列化）接口，将该对象转换成可存储或可传输的状态
-                intent.putExtra(ShowArticleAndCommon.ARTICLE_DETAIL, articleResult);
+                intent.putExtra(ShowArticleAndCommonActivity.ARTICLE_DETAIL, articleResult);
                 viewGroup.getContext().startActivity(intent);
             }
         });

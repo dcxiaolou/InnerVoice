@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.dcxiaolou.innervoice.ShowCourseIntroduce;
+import com.android.dcxiaolou.innervoice.ShowCourseIntroduceActivity;
 import com.android.dcxiaolou.innervoice.R;
 import com.android.dcxiaolou.innervoice.mode.CourseGuide;
 import com.bumptech.glide.Glide;
@@ -56,10 +56,10 @@ public class CourseIntroduceAdapter extends RecyclerView.Adapter<CourseIntroduce
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 CourseGuide courseGuide = courseGuides.get(position);
-                Intent intent = new Intent(viewGroup.getContext(), ShowCourseIntroduce.class);
-                intent.putExtra(ShowCourseIntroduce.COURSE_ID, courseGuide.getId());
-                intent.putExtra(ShowCourseIntroduce.COVER_PATH, courseGuide.getCover());
-                intent.putExtra(ShowCourseIntroduce.COURSE_TITLE, courseGuide.getTitle());
+                Intent intent = new Intent(viewGroup.getContext(), ShowCourseIntroduceActivity.class);
+                intent.putExtra(ShowCourseIntroduceActivity.COURSE_ID, courseGuide.getId());
+                intent.putExtra(ShowCourseIntroduceActivity.COVER_PATH, courseGuide.getCover());
+                intent.putExtra(ShowCourseIntroduceActivity.COURSE_TITLE, courseGuide.getTitle());
                 viewGroup.getContext().startActivity(intent);
             }
         });

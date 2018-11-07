@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,9 +40,9 @@ import okhttp3.Response;
 * 课程的播放
 * */
 
-public class CoursePlay extends AppCompatActivity {
+public class CoursePlayActivity extends AppCompatActivity {
 
-    private final static String TAG = "CoursePlay";
+    private final static String TAG = "CoursePlayActivity";
     public final static String COURSE_NO = "course_no"; //当前是该课程的第几个音频
 
     private Context mContext;
@@ -172,7 +171,7 @@ public class CoursePlay extends AppCompatActivity {
                     //设置返回键
                     videoPlayer.getBackButton().setImageResource(R.drawable.video_back);
                     //设置旋转
-                    orientationUtils = new OrientationUtils(CoursePlay.this, videoPlayer);
+                    orientationUtils = new OrientationUtils(CoursePlayActivity.this, videoPlayer);
                     //设置全屏按键功能,这是使用的是选择屏幕，而不是全屏
                     videoPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
                         @Override

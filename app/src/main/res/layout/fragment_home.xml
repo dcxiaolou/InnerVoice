@@ -91,7 +91,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/insurance_view"
+                        android:id="@+id/readLayout"
                         style="@style/height_wrap_width_weight"
                         android:layout_marginLeft="1dp"
                         android:gravity="center_horizontal"

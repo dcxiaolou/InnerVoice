@@ -34,12 +34,15 @@
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".ShowCourseIntroduce"
+            android:name=".ShowCourseIntroduceActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".CoursePlay"
+            android:name=".CoursePlayActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ShowArticleAndCommon"
+        <activity
+            android:name=".ShowArticleAndCommonActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ShowReadArticleActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
