@@ -1,7 +1,6 @@
 package com.android.dcxiaolou.innervoice.fragemnt;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -14,14 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.android.dcxiaolou.innervoice.R;
-import com.android.dcxiaolou.innervoice.ShowArticleAndCommon;
 import com.android.dcxiaolou.innervoice.adapter.CourseIntroduceAdapter;
-import com.android.dcxiaolou.innervoice.adapter.DailyBestAdapter;
+import com.android.dcxiaolou.innervoice.adapter.ReadArticleAdapter;
 import com.android.dcxiaolou.innervoice.mode.ADBanner;
 import com.android.dcxiaolou.innervoice.mode.CourseCollect;
 import com.android.dcxiaolou.innervoice.mode.CourseGuide;
@@ -68,7 +64,7 @@ public class HomeFragment extends Fragment implements OnBannerListener{
     private RecyclerView recyclerView;
     private List<CourseGuide> courseGuides;
 
-    private ListView dailyBestLv;
+    private RecyclerView dailyBestRv;
     private  List<ReadArticleResult> readArticleResults;
 
     // 创建view
@@ -217,7 +213,7 @@ public class HomeFragment extends Fragment implements OnBannerListener{
             @Override
             public void done(List<ReadArticle> list, BmobException e) {
                 if (e == null) {
-                    Log.d(TAG, "dailyBestLv size = " + list.size());
+                    Log.d(TAG, "dailyBestRv size = " + list.size());
                     BmobFile file;
                     for (ReadArticle readArticle : list) {
                         file = readArticle.getBmobFile();
@@ -245,7 +241,7 @@ public class HomeFragment extends Fragment implements OnBannerListener{
                                 }
                             });
                         } else {
-                            Log.d(TAG, "dailyBestLv bmobFile is null");
+                            Log.d(TAG, "dailyBestRv bmobFile is null");
                         }
                     }
 
@@ -265,19 +261,15 @@ public class HomeFragment extends Fragment implements OnBannerListener{
                 try {
                     Thread.sleep(1000); // 让主线程等待1s，以便获取相关数据
                     Log.d(TAG, "showDailyBest size = " + readArticleResults.size());
-                    dailyBestLv = (ListView) mRootView.findViewById(R.id.daily_best);
-                    dailyBestLv.setAdapter(new DailyBestAdapter(readArticleResults, mComtext));
-                    //添加点击事件，用于跳转到文章的详情页
-                    dailyBestLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            ReadArticleResult articleResult = readArticleResults.get(position);
-                            Intent intent = new Intent(view.getContext(), ShowArticleAndCommon.class);
-                            //用Intent传递对象，该对象要实现Serializable（序列化）接口，将该对象转换成可存储或可传输的状态
-                            intent.putExtra(ShowArticleAndCommon.ARTICLE_DETAIL, articleResult);
-                            startActivity(intent);
-                        }
-                    });
+                    //采用NestedScrollView + RecyclerView （NestedScrollView代替ScrollView可解决滑动冲突问题）
+                    dailyBestRv = (RecyclerView) mRootView.findViewById(R.id.daily_best);
+                    //解决触摸到RecyclerView的时候滑动有些粘连的感觉
+                    dailyBestRv.setNestedScrollingEnabled(false);
+                    LinearLayoutManager manager = new LinearLayoutManager(mContext);
+                    manager.setOrientation(LinearLayoutManager.VERTICAL);
+                    dailyBestRv.setLayoutManager(manager);
+                    ReadArticleAdapter adapter = new ReadArticleAdapter(readArticleResults);
+                    dailyBestRv.setAdapter(adapter);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

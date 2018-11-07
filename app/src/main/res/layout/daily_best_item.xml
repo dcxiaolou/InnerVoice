@@ -4,11 +4,12 @@
     android:id="@+id/daily_best_cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="2dp">
 
     <!--
-        每日精选引导模块中ListView的子项
+        每日精选引导模块中RecyclerView的子项
     -->
 
     <LinearLayout

@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,6 +31,16 @@ public class WelcomeActivity extends Activity {
         mWelcomeIv = (ImageView) findViewById(R.id.welcome_iv);
 
         cpb_countdown = (CountDownProgressBar) findViewById(R.id.cpb_countdown);
+
+        cpb_countdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                //跳转到主界面后 结束当前活动
+                finish();
+            }
+        });
 
         cpb_countdown.setDuration(3000, new CountDownProgressBar.OnFinishListener() {
             @Override

@@ -60,6 +60,19 @@ public class CourseIntroduceCatalogAdapter extends RecyclerView.Adapter<CourseIn
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
+                holder.coursePlay.setChecked(true);
+                Log.d(TAG, "position = " + position);
+                CourseIntroduceCatalog catalog = courseIntroduceCatalogs.get(position);
+                Intent intent = new Intent(mContext, CoursePlay.class);
+                intent.putExtra(CoursePlay.COURSE_NO, position); // 从0开始
+                mContext.startActivity(intent);
+            }
+        });
+        holder.coursePlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                holder.coursePlay.setChecked(true);
                 Log.d(TAG, "position = " + position);
                 CourseIntroduceCatalog catalog = courseIntroduceCatalogs.get(position);
                 Intent intent = new Intent(mContext, CoursePlay.class);
