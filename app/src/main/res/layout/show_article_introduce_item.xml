@@ -9,7 +9,7 @@
     app:cardElevation="2dp">
 
     <!--
-        每日精选引导模块中RecyclerView的子项
+        阅读模块引导模块中RecyclerView的子项
     -->
 
     <LinearLayout

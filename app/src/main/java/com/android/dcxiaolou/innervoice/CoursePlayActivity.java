@@ -1,5 +1,6 @@
 package com.android.dcxiaolou.innervoice;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.dcxiaolou.innervoice.adapter.CourseIntroduceCatalogAdapter;
 import com.android.dcxiaolou.innervoice.mode.CourseDetail;
 import com.android.dcxiaolou.innervoice.mode.CourseDetailResult;
 import com.bumptech.glide.Glide;
@@ -37,8 +39,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /*
-* 课程的播放
-* */
+ * 课程的播放
+ * */
 
 public class CoursePlayActivity extends AppCompatActivity {
 
@@ -68,7 +70,7 @@ public class CoursePlayActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
-        videoPlayer =  (StandardGSYVideoPlayer)findViewById(R.id.course_player);
+        videoPlayer = (StandardGSYVideoPlayer) findViewById(R.id.course_player);
 
         Intent intent = getIntent();
         courseNo = intent.getIntExtra(COURSE_NO, 0); // 从0开始
@@ -82,7 +84,14 @@ public class CoursePlayActivity extends AppCompatActivity {
         //从bmob获取相应的课程音频json文件地址
         getCourseForBmob(courseId, courseNo + 1);
         //使用Gson解析courseUrl的json文件，得到相应的课程音频地址
-        parseJsonByGson();
+        if (courseUrl == null) {
+            Toast.makeText(this, "哎呀Σ( ° △ °|||)，视频不见了！", Toast.LENGTH_SHORT).show();
+            Intent backIntent = new Intent(this, ShowCourseActivity.class);
+            backIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以关掉所要到的界面中间的activity
+            startActivity(backIntent);
+        } else {
+            parseJsonByGson();
+        }
     }
 
     private void getCourseForBmob(String courseId, int courseNo) {
@@ -119,10 +128,6 @@ public class CoursePlayActivity extends AppCompatActivity {
                 try {
                     Thread.sleep(1000); //停顿1s，以便获取数据
                     Log.d(TAG, "courseUrl = " + courseUrl);
-                    if (courseUrl == null) {
-                        Toast.makeText(mContext, "哎呀Σ( ° △ °|||)，视频不见了！", Toast.LENGTH_SHORT).show();
-                        return ;
-                    }
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder().url(courseUrl).build();
                     client.newCall(request).enqueue(new Callback() {
@@ -156,7 +161,7 @@ public class CoursePlayActivity extends AppCompatActivity {
                     Thread.sleep(1000); //停顿1s，便于获取coursePlayUrl
                     Log.d(TAG, "coursePlayUrl = " + coursePlayUrl);
                     int length = coursePlayUrl.length();
-                    playType = coursePlayUrl.substring(length-3, length);
+                    playType = coursePlayUrl.substring(length - 3, length);
                     Log.d(TAG, "playType = " + playType); //获取视频的类型（MP3、MP4）
                     videoPlayer.setUp(coursePlayUrl, true, "测试视频");
                     //增加封面
@@ -282,4 +287,7 @@ public class CoursePlayActivity extends AppCompatActivity {
         videoPlayer.setVideoAllCallBack(null);
         super.onBackPressed();
     }
+
+
+
 }

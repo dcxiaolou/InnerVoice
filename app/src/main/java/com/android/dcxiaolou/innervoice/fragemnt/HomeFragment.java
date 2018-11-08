@@ -17,9 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.android.dcxiaolou.innervoice.CoursePlayActivity;
-import com.android.dcxiaolou.innervoice.MainActivity;
 import com.android.dcxiaolou.innervoice.R;
+import com.android.dcxiaolou.innervoice.ShowCourseActivity;
 import com.android.dcxiaolou.innervoice.ShowReadArticleActivity;
 import com.android.dcxiaolou.innervoice.adapter.CourseIntroduceAdapter;
 import com.android.dcxiaolou.innervoice.adapter.ReadArticleAdapter;
@@ -73,7 +72,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     private  List<ReadArticleResult> readArticleResults;
 
     //子菜单项
-    private LinearLayout readLayout;
+    private LinearLayout readLayout, courseLayout;
 
     // 创建view
     @Nullable
@@ -92,21 +91,23 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         super.onActivityCreated(savedInstanceState);
 
         mAdBanner = (Banner) mRootView.findViewById(R.id.adbanner);
-        recyclerView = (RecyclerView) mRootView.findViewById(R.id.daily_best_rv);
+        recyclerView = (RecyclerView) mRootView.findViewById(R.id.course_recommend_rv);
 
-        readLayout = (LinearLayout) mRootView.findViewById(R.id.readLayout);
+        readLayout = (LinearLayout) mRootView.findViewById(R.id.read_layout);
+        courseLayout = (LinearLayout) mRootView.findViewById(R.id.course_layout);
 
         // 请求后台数据 从bmob获取banner图片，并用banner展示
         requestHomeBanner();
 
         // 课程推荐模块 采用RecyclerView来显示
-        initReadArticles(); //初始化内容
+        initCourse(); //初始化内容
 
-        // 每日精选模块 采用ListView来显示
+        // 每日精选模块 采用RecyclerView来显示
         initDailyBest();
 
         //给子菜单项添加点击事件
         readLayout.setOnClickListener(this);
+        courseLayout.setOnClickListener(this);
 
     }
 
@@ -120,9 +121,13 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.readLayout:
-                Intent intent = new Intent(mComtext, ShowReadArticleActivity.class);
-                mComtext.startActivity(intent);
+            case R.id.read_layout:
+                Intent readIntent = new Intent(mComtext, ShowReadArticleActivity.class);
+                mComtext.startActivity(readIntent);
+                break;
+            case R.id.course_layout:
+                Intent courseIntent = new Intent(mComtext, ShowCourseActivity.class);
+                mComtext.startActivity(courseIntent);
                 break;
         }
     }
@@ -175,7 +180,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         });
     }
 
-    private void initReadArticles() {
+    private void initCourse() {
         courseGuides = new ArrayList<>();
         // 使用okhttp获取课程引导信息
         OkHttpClient client = new OkHttpClient();

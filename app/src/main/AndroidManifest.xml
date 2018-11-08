@@ -42,7 +42,10 @@
         <activity
             android:name=".ShowArticleAndCommonActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ShowReadArticleActivity"
+        <activity
+            android:name=".ShowReadArticleActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ShowCourseActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 

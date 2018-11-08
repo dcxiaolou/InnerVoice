@@ -114,11 +114,15 @@ public class CourseDetailFragment extends Fragment {
                 CourseIntroduceForShow courseIntroduceForShow = gson.fromJson(result, CourseIntroduceForShow.class);
                 final String content = courseIntroduceForShow.getIntroduce().get(0);
                 content.replace("\n", "");
-                 Log.d(TAG, result);
+                Log.d(TAG, result);
                 mHandler.post(new Runnable() { // 显示课程详细信息
                     @Override
                     public void run() {
-                        courseDetail.setHtml(content, new HtmlHttpImageGetter(courseDetail));
+                        if (content == null) {
+                            courseDetail.setHtml("<h2>该课程暂无介绍</h2>", new HtmlHttpImageGetter(courseDetail));
+                        } else {
+                            courseDetail.setHtml(content, new HtmlHttpImageGetter(courseDetail));
+                        }
                     }
                 });
             }

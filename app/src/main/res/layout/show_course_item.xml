@@ -1,0 +1,63 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:dc="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/course_item_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="2dp">
+
+    <!--
+        课程模块RecyclerView的子项
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--自定义控件用来解决图片宽高比例问题，让图片显示正常-->
+        <com.android.dcxiaolou.innervoice.defineUI.ProportionImageView
+            android:id="@+id/course_cover"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            dc:heightProportion="9"
+            dc:widthProportion="16" />
+
+        <!--android:ellipsize="end" 省略号在结尾-->
+        <TextView
+            android:id="@+id/course_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/course_join_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人参与"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

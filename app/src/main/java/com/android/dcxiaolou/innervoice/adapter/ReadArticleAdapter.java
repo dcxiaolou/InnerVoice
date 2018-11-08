@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 /*
-* 每日精选模块的适配器（基于RecyclerView）
+* 每日精选模块、阅读模块文章内容的适配器（基于RecyclerView）
 * */
 
 public class ReadArticleAdapter extends RecyclerView.Adapter<ReadArticleAdapter.ViewHolder> {

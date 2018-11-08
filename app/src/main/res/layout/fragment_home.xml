@@ -91,7 +91,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/readLayout"
+                        android:id="@+id/read_layout"
                         style="@style/height_wrap_width_weight"
                         android:layout_marginLeft="1dp"
                         android:gravity="center_horizontal"
@@ -164,7 +164,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/league_view"
+                        android:id="@+id/course_layout"
                         style="@style/height_wrap_width_weight"
                         android:layout_marginLeft="1dp"
                         android:gravity="center_horizontal"
@@ -230,7 +230,7 @@
             android:textSize="14sp" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/daily_best_rv"
+            android:id="@+id/course_recommend_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp" />

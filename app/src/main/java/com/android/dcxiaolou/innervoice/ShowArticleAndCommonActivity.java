@@ -20,6 +20,10 @@ import org.sufficientlysecure.htmltextview.HtmlTextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* 阅读模块文章及评论的详细内容展示
+* */
+
 public class ShowArticleAndCommonActivity extends AppCompatActivity {
 
     private final static String TAG = "ShowArticleAndCommonActivity";
