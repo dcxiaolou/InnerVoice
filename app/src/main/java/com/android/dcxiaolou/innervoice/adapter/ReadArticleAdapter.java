@@ -56,7 +56,7 @@ public class ReadArticleAdapter extends RecyclerView.Adapter<ReadArticleAdapter.
     public ReadArticleAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
         if (mContext == null)
             this.mContext = viewGroup.getContext();
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.daily_best_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.show_article_introduce_item, viewGroup, false);
         final ViewHolder holder = new ViewHolder(view);
         //添加点击事件，用于跳转到文章的详情页
         holder.dailyBestCv.setOnClickListener(new View.OnClickListener() {
