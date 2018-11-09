@@ -52,6 +52,14 @@
 
     <include
         android:id="@+id/fm_introduce"
-        layout="@layout/fm_introduce" />
+        layout="@layout/fm_introduce_item" />
+
+    <include android:id="@+id/fm_mood"
+        layout="@layout/fm_mood"
+        android:visibility="gone"/>
+
+    <include android:id="@+id/fm_scene"
+        layout="@layout/fm_scene"
+        android:visibility="gone"/>
 
 </LinearLayout>

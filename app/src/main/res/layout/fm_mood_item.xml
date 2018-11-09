@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/fm_introduce_recycler_view"
+        android:id="@+id/fm_mood_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

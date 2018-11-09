@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FMIntroduceAdapter extends RecyclerView.Adapter<FMIntroduceAdapter.ViewHolder> {
+public class FMItemAdapter extends RecyclerView.Adapter<FMItemAdapter.ViewHolder> {
 
     private Context mContext;
 
@@ -34,32 +34,32 @@ public class FMIntroduceAdapter extends RecyclerView.Adapter<FMIntroduceAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = (ProportionImageView) itemView.findViewById(R.id.fm_introduce_image);
-            titleTv = (TextView) itemView.findViewById(R.id.fm_introduce_title);
-            speakTv = (TextView) itemView.findViewById(R.id.fm_introduce_speak);
-            viewTv = (TextView) itemView.findViewById(R.id.fm_introduce_view);
-            likeTv = (TextView) itemView.findViewById(R.id.fm_introduce_like);
+            imageView = (ProportionImageView) itemView.findViewById(R.id.fm_item_image);
+            titleTv = (TextView) itemView.findViewById(R.id.fm_item_title);
+            speakTv = (TextView) itemView.findViewById(R.id.fm_item_speak);
+            viewTv = (TextView) itemView.findViewById(R.id.fm_item_view);
+            likeTv = (TextView) itemView.findViewById(R.id.fm_item_like);
 
         }
     }
 
-    public FMIntroduceAdapter(List<FMResult> fmResults) {
+    public FMItemAdapter(List<FMResult> fmResults) {
         this.fmResults = fmResults;
     }
 
     @NonNull
     @Override
-    public FMIntroduceAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public FMItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         if (mContext == null) {
             mContext = viewGroup.getContext();
         }
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fm_introduce_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fm_menu_item, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FMIntroduceAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull FMItemAdapter.ViewHolder viewHolder, int i) {
         FMResult fmResult = fmResults.get(i);
         Glide.with(mContext).load(fmResult.getData().getCover()).into(viewHolder.imageView);
         viewHolder.titleTv.setText(fmResult.getData().getTitle());

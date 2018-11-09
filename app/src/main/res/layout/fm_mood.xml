@@ -5,9 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fm_introduce_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <include android:id="@+id/fm_mood_first"
+        layout="@layout/fm_mood_first"/>
+
+    <include
+        android:id="@+id/fm_mood_Rv"
+        layout="@layout/fm_mood_item"
+        android:visibility="gone"/>
+
 
 </LinearLayout>
