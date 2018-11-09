@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--给FM界面的Toolbar添加action按钮-->
+    <item android:id="@+id/menu"
+        android:icon="@drawable/menu"
+        app:showAsAction="always"/>
+
+</menu>

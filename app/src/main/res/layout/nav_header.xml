@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--FM模块详情页滑动菜单的headerLayout-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/root_bg_color"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/introduce_rb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="推荐"
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"
+            android:textColor="@color/rb_text_color" />
+
+        <RadioButton
+            android:id="@+id/mood_rb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="心情"
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"
+            android:textColor="@color/rb_text_color" />
+
+        <RadioButton
+            android:id="@+id/scene_rb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="场景"
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"
+            android:textColor="@color/rb_text_color" />
+
+    </RadioGroup>
+
+    <include
+        android:id="@+id/fm_introduce"
+        layout="@layout/fm_introduce" />
+
+</LinearLayout>

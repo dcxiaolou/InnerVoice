@@ -11,11 +11,13 @@ import java.util.List;
 * 阅读模块顶部菜单的适配器
 * */
 
-public class ShowArticleMenuAdapter extends FragmentPagerAdapter {
+public class TabLayoutMenuAdapter extends FragmentPagerAdapter {
+
     private Context context;
     private List<Fragment> fragments;
     private List<String> strings;
-    public ShowArticleMenuAdapter(List<Fragment> fragments, List<String> strings, FragmentManager fragmentManager, Context context){
+
+    public TabLayoutMenuAdapter(List<Fragment> fragments, List<String> strings, FragmentManager fragmentManager, Context context){
         super(fragmentManager);
         this.strings = strings;
         this.context = context;

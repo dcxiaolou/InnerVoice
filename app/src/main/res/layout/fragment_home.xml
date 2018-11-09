@@ -187,7 +187,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/cost_comm"
+                        android:id="@+id/fm_layout"
                         style="@style/height_wrap_width_weight"
                         android:layout_marginLeft="1dp"
                         android:gravity="center_horizontal"

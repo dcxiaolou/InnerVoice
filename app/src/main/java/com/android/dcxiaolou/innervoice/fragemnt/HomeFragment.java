@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 
 import com.android.dcxiaolou.innervoice.R;
 import com.android.dcxiaolou.innervoice.ShowCourseActivity;
+import com.android.dcxiaolou.innervoice.ShowFMActivity;
 import com.android.dcxiaolou.innervoice.ShowReadArticleActivity;
 import com.android.dcxiaolou.innervoice.adapter.CourseIntroduceAdapter;
 import com.android.dcxiaolou.innervoice.adapter.ReadArticleAdapter;
@@ -72,7 +73,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     private  List<ReadArticleResult> readArticleResults;
 
     //子菜单项
-    private LinearLayout readLayout, courseLayout;
+    private LinearLayout readLayout, courseLayout, fmLayout;
 
     // 创建view
     @Nullable
@@ -95,6 +96,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
 
         readLayout = (LinearLayout) mRootView.findViewById(R.id.read_layout);
         courseLayout = (LinearLayout) mRootView.findViewById(R.id.course_layout);
+        fmLayout = (LinearLayout) mRootView.findViewById(R.id.fm_layout);
 
         // 请求后台数据 从bmob获取banner图片，并用banner展示
         requestHomeBanner();
@@ -108,6 +110,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         //给子菜单项添加点击事件
         readLayout.setOnClickListener(this);
         courseLayout.setOnClickListener(this);
+        fmLayout.setOnClickListener(this);
 
     }
 
@@ -128,6 +131,10 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
             case R.id.course_layout:
                 Intent courseIntent = new Intent(mComtext, ShowCourseActivity.class);
                 mComtext.startActivity(courseIntent);
+                break;
+            case R.id.fm_layout:
+                Intent intent = new Intent(mComtext, ShowFMActivity.class);
+                mComtext.startActivity(intent);
                 break;
         }
     }

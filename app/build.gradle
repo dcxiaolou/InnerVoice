@@ -58,4 +58,6 @@ dependencies {
     }
     //引入TabLayout
     implementation 'com.android.support:design:28.0.0'
+    //引入circleimageview，是图片圆形化
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

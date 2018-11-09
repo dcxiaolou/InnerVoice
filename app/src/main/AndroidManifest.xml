@@ -45,8 +45,12 @@
         <activity
             android:name=".ShowReadArticleActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ShowCourseActivity"
+        <activity
+            android:name=".ShowCourseActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ShowFMActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:label="心理FM"/>
     </application>
 
 </manifest>

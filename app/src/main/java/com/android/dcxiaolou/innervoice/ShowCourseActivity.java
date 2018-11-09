@@ -22,6 +22,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/*
+* 课程模块详情页
+* */
+
 public class ShowCourseActivity extends AppCompatActivity {
 
     private Handler mHandler = new Handler();
