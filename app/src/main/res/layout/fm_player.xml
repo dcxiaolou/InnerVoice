@@ -1,0 +1,175 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dc="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <com.android.dcxiaolou.innervoice.defineUI.ProportionImageView
+            android:id="@+id/fm_background"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            dc:heightProportion="5"
+            dc:widthProportion="8"
+            android:src="@drawable/broadcast_bg"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:background="#6000"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/fm_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="不评价别人的生活，是一个人最基本的修养"
+                android:textSize="18dp"
+                android:ellipsize="end"
+                android:maxLines="2"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="主播: "
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/fm_speak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="素年锦时FM"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/fm_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="一个人最大的恶意，就是把自己的理解强加于别人，把所有的结果理所当然用自己的过程来解释，并一直认为自己是正确的。” 不评价别人是一种修养，不理会别人的评价是一种修行。"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/fm_view_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:drawableLeft="@drawable/listen_music"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/white"
+                    android:text="1000"/>
+
+                <TextView
+                    android:id="@+id/fm_like_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/digg_white"
+                    android:textColor="@color/white"
+                    android:drawablePadding="10dp"
+                    android:text="1000"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_above="@+id/control_rb"
+        android:orientation="horizontal">
+
+        <!--显示当前进度-->
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="00:00"
+            android:textColor="@color/rb_text_color"/>
+
+        <SeekBar
+            android:id="@+id/skbProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.0"
+            android:max="100"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+        <!--显示总进度-->
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/rb_text_color"
+            android:text="00:00" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/control_rb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/previous_iv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/previous" />
+
+        <ImageView
+            android:id="@+id/play_pause_iv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/play"/>
+
+        <ImageView
+            android:id="@+id/next_iv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/next"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

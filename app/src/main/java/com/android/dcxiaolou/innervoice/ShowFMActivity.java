@@ -1,8 +1,10 @@
 package com.android.dcxiaolou.innervoice;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,17 +14,24 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.dcxiaolou.innervoice.adapter.FMItemAdapter;
 import com.android.dcxiaolou.innervoice.mode.FM;
 import com.android.dcxiaolou.innervoice.mode.FMResult;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -39,6 +48,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import com.android.dcxiaolou.innervoice.util.*;
+
 /*
  * FM模块详情页
  * */
@@ -50,6 +61,12 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
     private boolean menuOpen = false;
     private int fmMenuItemOpen = 0;
     private int menuId = 1;
+    //记录播放状态
+    private int isPlay = 0;
+    //记录有多少首FM
+    private int countFM = 0;
+    //记录当前播放的是第几首
+    private int currentFM = 0;
 
     private Handler mHandler = new Handler();
     private Context mContext;
@@ -74,6 +91,14 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
     private RecyclerView introduceRv, moodRv, sceneRv;
 
     private List<FMResult> fmResults;
+
+    private ImageView playAndPauseIv, previousIv, nextIv;
+    private SeekBar skbProgress;
+    private static TextView tv_progress;
+    private static TextView tv_total;
+    private BroadcastPlayer player;
+    private ImageView fmBackground;
+    private TextView fmTitle, fmSpeak, fmIntroduce, fmViewNum, fmLikeNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -471,13 +496,242 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
 
                     //展示FM
                     ShowIntroduce(recyclerView);
-
+                    //初始化播放器
+                    initBroadcastPlayer();
                 } else {
                     e.printStackTrace();
                 }
             }
         });
     }
+
+
+    private void initBroadcastPlayer() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+
+                    fmBackground = (ImageView) findViewById(R.id.fm_background);
+                    fmTitle = (TextView) findViewById(R.id.fm_title);
+                    fmSpeak = (TextView) findViewById(R.id.fm_speak);
+                    fmIntroduce = (TextView) findViewById(R.id.fm_introduce);
+                    fmViewNum = (TextView) findViewById(R.id.fm_view_num);
+                    fmLikeNum = (TextView) findViewById(R.id.fm_like_num);
+
+                    previousIv = (ImageView) findViewById(R.id.previous_iv);
+                    playAndPauseIv = (ImageView) findViewById(R.id.play_pause_iv);
+                    nextIv = (ImageView) findViewById(R.id.next_iv);
+
+                    previousIv.setOnClickListener(new ClickEvent());
+                    playAndPauseIv.setOnClickListener(new ClickEvent());
+                    nextIv.setOnClickListener(new ClickEvent());
+
+                    skbProgress = (SeekBar) findViewById(R.id.skbProgress);
+                    skbProgress.setOnSeekBarChangeListener(new SeekBarChangeEvent());
+
+                    tv_progress = (TextView) findViewById(R.id.tv_progress);
+                    tv_total = (TextView) findViewById(R.id.tv_total);
+
+                    TelephonyManager telephonyManager=(TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                    telephonyManager.listen(new MyPhoneListener(), PhoneStateListener.LISTEN_CALL_STATE);
+
+                    //Log.d(TAG, "size = " + fmResults.size());
+                    countFM = fmResults.size();
+                    currentFM = 0;
+
+                    FMResult.DataBean dataBean = fmResults.get(0).getData();
+                    String url = dataBean.getUrl();
+                    player = new BroadcastPlayer(url, skbProgress);
+                    Glide.with(mContext).load(dataBean.getCover()).into(fmBackground);
+                    fmTitle.setText(dataBean.getTitle());
+                    fmSpeak.setText(dataBean.getSpeak());
+                    fmIntroduce.setText(dataBean.getContent());
+                    fmViewNum.setText(dataBean.getViewnum());
+                    fmLikeNum.setText(dataBean.getFavnum());
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 只有电话来了之后才暂停音乐的播放
+     */
+    private final class MyPhoneListener extends android.telephony.PhoneStateListener{
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            switch (state) {
+                case TelephonyManager.CALL_STATE_RINGING://电话来了
+                    player.callIsComing();
+                    break;
+                case TelephonyManager.CALL_STATE_IDLE: //通话结束
+                    player.callIsDown();
+                    break;
+            }
+        }
+    }
+
+    //播放按钮事件处理
+    class ClickEvent implements View.OnClickListener {
+        @Override
+        public void onClick(View arg0) {
+            if (arg0 == playAndPauseIv) {
+                if (isPlay == 0) {
+                    player.play();
+                    isPlay = 1;
+                    playAndPauseIv.setImageResource(R.drawable.pause);
+                } else if (isPlay == 1) {
+                    boolean pause = player.pause();
+                    if (pause) {
+                        playAndPauseIv.setImageResource(R.drawable.play);
+                    } else {
+                        playAndPauseIv.setImageResource(R.drawable.pause);
+                    }
+                }
+            } else if (arg0 == previousIv) {
+                Log.d(TAG, "previousIv previousIv = " + currentFM);
+                if (currentFM > 0) {
+                    player.stop();
+                    currentFM -= 1;
+                    FMResult.DataBean dataBean = fmResults.get(currentFM).getData();
+                    String url = dataBean.getUrl();
+                    player = new BroadcastPlayer(url, skbProgress);
+                    Glide.with(mContext).load(dataBean.getCover()).into(fmBackground);
+                    fmTitle.setText(dataBean.getTitle());
+                    fmSpeak.setText(dataBean.getSpeak());
+                    fmIntroduce.setText(dataBean.getContent());
+                    fmViewNum.setText(dataBean.getViewnum());
+                    fmLikeNum.setText(dataBean.getFavnum());
+                    player.play();
+                    isPlay = 1;
+                    playAndPauseIv.setImageResource(R.drawable.pause);
+                } else {
+                    Toast.makeText(mContext, "φ(>ω<*)，已经是第一首了", Toast.LENGTH_SHORT).show();
+                }
+            } else if (arg0 == nextIv) {
+                Log.d(TAG, "nextIv previousIv = " + currentFM + " countFM = " + countFM);
+                if (currentFM < countFM - 1) {
+                    player.stop();
+                    currentFM += 1;
+                    FMResult.DataBean dataBean = fmResults.get(currentFM).getData();
+                    String url = dataBean.getUrl();
+                    player = new BroadcastPlayer(url, skbProgress);
+                    Glide.with(mContext).load(dataBean.getCover()).into(fmBackground);
+                    fmTitle.setText(dataBean.getTitle());
+                    fmSpeak.setText(dataBean.getSpeak());
+                    fmIntroduce.setText(dataBean.getContent());
+                    fmViewNum.setText(dataBean.getViewnum());
+                    fmLikeNum.setText(dataBean.getFavnum());
+                    player.play();
+                    isPlay = 1;
+                    playAndPauseIv.setImageResource(R.drawable.pause);
+                } else {
+                    Toast.makeText(mContext, "φ(>ω<*)，已经是最后一首了", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    class SeekBarChangeEvent implements SeekBar.OnSeekBarChangeListener {
+        int progress;
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress,
+                                      boolean fromUser) {
+            // 原本是(progress/seekBar.getMax())*player.mediaPlayer.getDuration()
+            this.progress = progress * player.mediaPlayer.getDuration()
+                    / seekBar.getMax();
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            // seekTo()的参数是相对与影片时间的数字，而不是与seekBar.getMax()相对的数字
+            player.mediaPlayer.seekTo(progress);
+        }
+    }
+
+    //创建消息处理器对象
+    @SuppressLint("HandlerLeak")
+    public static Handler handler = new Handler(){
+
+        //在主线程中处理从子线程发送过来的消息
+        @Override
+        public void handleMessage(Message msg) {
+
+            //获取从子线程发送过来的音乐播放的进度
+            Bundle bundle = msg.getData();
+
+            //歌曲的总时长(毫秒)
+            int duration = bundle.getInt("duration");
+
+            //歌曲的当前进度(毫秒)
+            int currentPostition = bundle.getInt("currentPosition");
+
+            //歌曲的总时长
+            int minute = duration / 1000 / 60;
+            int second = duration / 1000 % 60;
+
+            String strMinute = null;
+            String strSecond = null;
+
+            //如果歌曲的时间中的分钟小于10
+            if(minute < 10) {
+
+                //在分钟的前面加一个0
+                strMinute = "0" + minute;
+            } else {
+
+                strMinute = minute + "";
+            }
+
+            //如果歌曲的时间中的秒钟小于10
+            if(second < 10)
+            {
+                //在秒钟前面加一个0
+                strSecond = "0" + second;
+            } else {
+
+                strSecond = second + "";
+            }
+
+            tv_total.setText(strMinute + ":" + strSecond);
+
+            //歌曲当前播放时长
+            minute = currentPostition / 1000 / 60;
+            second = currentPostition / 1000 % 60;
+
+            //如果歌曲的时间中的分钟小于10
+            if(minute < 10) {
+
+                //在分钟的前面加一个0
+                strMinute = "0" + minute;
+            } else {
+
+                strMinute = minute + "";
+            }
+
+            //如果歌曲的时间中的秒钟小于10
+            if(second < 10) {
+
+                //在秒钟前面加一个0
+                strSecond = "0" + second;
+            } else {
+
+                strSecond = second + "";
+            }
+
+            tv_progress.setText(strMinute + ":" + strSecond);
+        }
+    };
 
     private void ShowIntroduce(final RecyclerView recyclerView) {
 
