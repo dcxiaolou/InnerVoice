@@ -59,6 +59,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
 
     private final static String TAG = "ShowFMActivity";
     public final static String FM_CONTENT = "fm_content";
+    public final static String FM_ITEMNO = "fm_item_no";
 
     private boolean menuOpen = false;
     private int fmMenuItemOpen = 0;
@@ -550,15 +551,21 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
                         player.mediaPlayer.reset();
                     }
                     String url, cover, title, speak, introduce, viewNum, likeNum;
+                    //处理通过列表点击跳转过来的
                     Intent intent = getIntent();
                     FMResult fmResult = (FMResult) intent.getSerializableExtra(FM_CONTENT);
+                    int itemNo = intent.getIntExtra(FM_ITEMNO, -1);
+                    if (itemNo != -1) {
+                        currentFM = itemNo;
+                        Log.d(TAG, "currentFM = " + currentFM);
+                    }
                     FMResult.DataBean dataBean;
 
                     if (fmResult != null) {
                         dataBean = fmResult.getData();
                         url = dataBean.getUrl();
                         cover = dataBean.getCover();
-                        title = dataBean.getTitle();Log.d(TAG, dataBean.getTitle());
+                        title = dataBean.getTitle();
                         speak = dataBean.getSpeak();
                         introduce = dataBean.getContent();
                         viewNum = dataBean.getViewnum();

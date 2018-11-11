@@ -72,6 +72,7 @@ public class FMItemAdapter extends RecyclerView.Adapter<FMItemAdapter.ViewHolder
                 //Log.d(Tag, result.getData().getTitle());
                 Intent intent = new Intent(viewGroup.getContext(), ShowFMActivity.class);
                 intent.putExtra(ShowFMActivity.FM_CONTENT, result);
+                intent.putExtra(ShowFMActivity.FM_ITEMNO, position);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //将处于要跳转到的活动之间的活动清除
                 viewGroup.getContext().startActivity(intent);
             }
