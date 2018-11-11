@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.NavigationView;
@@ -596,6 +597,32 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
                         fmViewNum.setText(viewNum);
                         fmLikeNum.setText(likeNum);
                     }
+
+                    //自动播放下一首
+                    player.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            if (currentFM < countFM - 1) {
+                                player.stop();
+                                currentFM += 1;
+                                FMResult.DataBean dataBean = fmResults.get(currentFM).getData();
+                                String url = dataBean.getUrl();
+                                player = new BroadcastPlayer(url, skbProgress);
+                                Glide.with(mContext).load(dataBean.getCover()).into(fmBackground);
+                                fmTitle.setText(dataBean.getTitle());
+                                fmSpeak.setText(dataBean.getSpeak());
+                                fmIntroduce.setText(dataBean.getContent());
+                                fmViewNum.setText(dataBean.getViewnum());
+                                fmLikeNum.setText(dataBean.getFavnum());
+                                player.play();
+                                isPlay = 1;
+                                playAndPauseIv.setImageResource(R.drawable.pause);
+                            } else {
+                                Toast.makeText(mContext, "φ(>ω<*)，播放完了，换个歌单吧", Toast.LENGTH_SHORT).show();
+                                playAndPauseIv.setImageResource(R.drawable.play);
+                            }
+                        }
+                    });
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
