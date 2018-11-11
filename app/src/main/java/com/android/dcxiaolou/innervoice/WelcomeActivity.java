@@ -23,6 +23,8 @@ public class WelcomeActivity extends Activity {
 
     // 倒计时进度条
     private CountDownProgressBar cpb_countdown;
+    //标记是否跳过欢迎页，解决跳过欢迎页后主页加载两次的bug
+    private boolean isPass = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class WelcomeActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(intent);
+                isPass = true;
                 //跳转到主界面后 结束当前活动
                 finish();
             }
@@ -60,12 +63,12 @@ public class WelcomeActivity extends Activity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-
-                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                startActivity(intent);
+                if (!isPass) {
+                    Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
                 //跳转到主界面后 结束当前活动
                 finish();
-
             }
         });
 
