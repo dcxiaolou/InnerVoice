@@ -1,8 +1,9 @@
 package com.android.dcxiaolou.innervoice.mode;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class FMResult {
+public class FMResult implements Serializable {
 
 
     /**
@@ -29,7 +30,7 @@ public class FMResult {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * id : 22
          * title : 得之我幸，失之我命

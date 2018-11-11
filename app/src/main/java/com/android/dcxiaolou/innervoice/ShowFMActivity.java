@@ -3,6 +3,7 @@ package com.android.dcxiaolou.innervoice;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.NavigationView;
@@ -57,6 +58,7 @@ import com.android.dcxiaolou.innervoice.util.*;
 public class ShowFMActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final static String TAG = "ShowFMActivity";
+    public final static String FM_CONTENT = "fm_content";
 
     private boolean menuOpen = false;
     private int fmMenuItemOpen = 0;
@@ -90,7 +92,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
 
     private RecyclerView introduceRv, moodRv, sceneRv;
 
-    private List<FMResult> fmResults;
+    private List<FMResult> fmResults, fmNewResults;
 
     private ImageView playAndPauseIv, previousIv, nextIv;
     private SeekBar skbProgress;
@@ -99,6 +101,8 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
     private BroadcastPlayer player;
     private ImageView fmBackground;
     private TextView fmTitle, fmSpeak, fmIntroduce, fmViewNum, fmLikeNum;
+    private AudioManager.OnAudioFocusChangeListener mAudioFocusChangeListener = null;
+    private AudioManager mAudioMgr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -263,7 +267,8 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
             }
             return true;
         } else if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && !menuOpen) {
-            return super.onKeyDown(keyCode, event);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -534,22 +539,58 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
                     tv_progress = (TextView) findViewById(R.id.tv_progress);
                     tv_total = (TextView) findViewById(R.id.tv_total);
 
-                    TelephonyManager telephonyManager=(TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                    TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
                     telephonyManager.listen(new MyPhoneListener(), PhoneStateListener.LISTEN_CALL_STATE);
 
                     //Log.d(TAG, "size = " + fmResults.size());
                     countFM = fmResults.size();
                     currentFM = 0;
+                    if (player != null) {
+                        player.stop();
+                        player.mediaPlayer.reset();
+                    }
+                    String url, cover, title, speak, introduce, viewNum, likeNum;
+                    Intent intent = getIntent();
+                    FMResult fmResult = (FMResult) intent.getSerializableExtra(FM_CONTENT);
+                    FMResult.DataBean dataBean;
 
-                    FMResult.DataBean dataBean = fmResults.get(0).getData();
-                    String url = dataBean.getUrl();
-                    player = new BroadcastPlayer(url, skbProgress);
-                    Glide.with(mContext).load(dataBean.getCover()).into(fmBackground);
-                    fmTitle.setText(dataBean.getTitle());
-                    fmSpeak.setText(dataBean.getSpeak());
-                    fmIntroduce.setText(dataBean.getContent());
-                    fmViewNum.setText(dataBean.getViewnum());
-                    fmLikeNum.setText(dataBean.getFavnum());
+                    if (fmResult != null) {
+                        dataBean = fmResult.getData();
+                        url = dataBean.getUrl();
+                        cover = dataBean.getCover();
+                        title = dataBean.getTitle();Log.d(TAG, dataBean.getTitle());
+                        speak = dataBean.getSpeak();
+                        introduce = dataBean.getContent();
+                        viewNum = dataBean.getViewnum();
+                        likeNum = dataBean.getFavnum();
+                        player = new BroadcastPlayer(url, skbProgress);
+                        player.mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                        Glide.with(mContext).load(cover).into(fmBackground);
+                        fmTitle.setText(title);
+                        fmSpeak.setText(speak);
+                        fmIntroduce.setText(introduce);
+                        fmViewNum.setText(viewNum);
+                        fmLikeNum.setText(likeNum);
+                        player.play();
+                        isPlay = 1;
+                        playAndPauseIv.setImageResource(R.drawable.pause);
+                    } else {
+                        dataBean = fmResults.get(0).getData();
+                        url = dataBean.getUrl();
+                        cover = dataBean.getCover();
+                        title = dataBean.getTitle();
+                        speak = dataBean.getSpeak();
+                        introduce = dataBean.getContent();
+                        viewNum = dataBean.getViewnum();
+                        likeNum = dataBean.getFavnum();
+                        player = new BroadcastPlayer(url, skbProgress);
+                        Glide.with(mContext).load(cover).into(fmBackground);
+                        fmTitle.setText(title);
+                        fmSpeak.setText(speak);
+                        fmIntroduce.setText(introduce);
+                        fmViewNum.setText(viewNum);
+                        fmLikeNum.setText(likeNum);
+                    }
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -558,11 +599,10 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-
     /**
      * 只有电话来了之后才暂停音乐的播放
      */
-    private final class MyPhoneListener extends android.telephony.PhoneStateListener{
+    private final class MyPhoneListener extends android.telephony.PhoneStateListener {
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             switch (state) {
@@ -639,6 +679,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
 
     class SeekBarChangeEvent implements SeekBar.OnSeekBarChangeListener {
         int progress;
+
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress,
                                       boolean fromUser) {
@@ -661,7 +702,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
 
     //创建消息处理器对象
     @SuppressLint("HandlerLeak")
-    public static Handler handler = new Handler(){
+    public static Handler handler = new Handler() {
 
         //在主线程中处理从子线程发送过来的消息
         @Override
@@ -684,7 +725,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
             String strSecond = null;
 
             //如果歌曲的时间中的分钟小于10
-            if(minute < 10) {
+            if (minute < 10) {
 
                 //在分钟的前面加一个0
                 strMinute = "0" + minute;
@@ -694,8 +735,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             //如果歌曲的时间中的秒钟小于10
-            if(second < 10)
-            {
+            if (second < 10) {
                 //在秒钟前面加一个0
                 strSecond = "0" + second;
             } else {
@@ -710,7 +750,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
             second = currentPostition / 1000 % 60;
 
             //如果歌曲的时间中的分钟小于10
-            if(minute < 10) {
+            if (minute < 10) {
 
                 //在分钟的前面加一个0
                 strMinute = "0" + minute;
@@ -720,7 +760,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             //如果歌曲的时间中的秒钟小于10
-            if(second < 10) {
+            if (second < 10) {
 
                 //在秒钟前面加一个0
                 strSecond = "0" + second;
@@ -757,4 +797,9 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        player.stop();
+    }
 }
