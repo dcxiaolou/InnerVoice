@@ -84,14 +84,7 @@ public class CoursePlayActivity extends AppCompatActivity {
         //从bmob获取相应的课程音频json文件地址
         getCourseForBmob(courseId, courseNo + 1);
         //使用Gson解析courseUrl的json文件，得到相应的课程音频地址
-        if (courseUrl == null) {
-            Toast.makeText(this, "哎呀Σ( ° △ °|||)，视频不见了！", Toast.LENGTH_SHORT).show();
-            Intent backIntent = new Intent(this, ShowCourseActivity.class);
-            backIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以关掉所要到的界面中间的activity
-            startActivity(backIntent);
-        } else {
-            parseJsonByGson();
-        }
+        parseJsonByGson();
     }
 
     private void getCourseForBmob(String courseId, int courseNo) {
@@ -128,24 +121,37 @@ public class CoursePlayActivity extends AppCompatActivity {
                 try {
                     Thread.sleep(1000); //停顿1s，以便获取数据
                     Log.d(TAG, "courseUrl = " + courseUrl);
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder().url(courseUrl).build();
-                    client.newCall(request).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            e.printStackTrace();
-                        }
+                    if (courseUrl == null) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //Toast只能在主线程中使用哦
+                                Toast.makeText(mContext, "哎呀Σ( ° △ °|||)，视频不见了！", Toast.LENGTH_SHORT).show();
+                                Intent backIntent = new Intent(mContext, ShowCourseActivity.class);
+                                backIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以关掉所要到的界面中间的activity
+                                startActivity(backIntent);
+                            }
+                        });
+                    } else {
+                        OkHttpClient client = new OkHttpClient();
+                        Request request = new Request.Builder().url(courseUrl).build();
+                        client.newCall(request).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                e.printStackTrace();
+                            }
 
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            String result = response.body().string();
-                            Gson gson = new Gson();
-                            CourseDetailResult detailResult = gson.fromJson(result, CourseDetailResult.class);
-                            String coursePlayUrl = detailResult.getMedia();
-                            // 初始化GSYVideoPlayer，用来播放课程
-                            init(coursePlayUrl);
-                        }
-                    });
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                String result = response.body().string();
+                                Gson gson = new Gson();
+                                CourseDetailResult detailResult = gson.fromJson(result, CourseDetailResult.class);
+                                String coursePlayUrl = detailResult.getMedia();
+                                // 初始化GSYVideoPlayer，用来播放课程
+                                init(coursePlayUrl);
+                            }
+                        });
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -287,7 +293,4 @@ public class CoursePlayActivity extends AppCompatActivity {
         videoPlayer.setVideoAllCallBack(null);
         super.onBackPressed();
     }
-
-
-
 }

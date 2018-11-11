@@ -110,19 +110,21 @@ public class CourseDetailFragment extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String result = response.body().string();
+                Log.d(TAG, result);
                 Gson gson = new Gson();
                 CourseIntroduceForShow courseIntroduceForShow = gson.fromJson(result, CourseIntroduceForShow.class);
-                final String content = courseIntroduceForShow.getIntroduce().get(0);
-                content.replace("\n", "");
-                Log.d(TAG, result);
+                List<String> contents = courseIntroduceForShow.getIntroduce();
+                final String content;
+                if (contents.size() == 0) {
+                    content = "<h2  style=\" text-align:center; \">!!!∑(ﾟДﾟノ)ノ该课程暂无介绍</h2>";
+                } else {
+                    content = contents.get(0);
+                    content.replace("\n", "");
+                }
                 mHandler.post(new Runnable() { // 显示课程详细信息
                     @Override
                     public void run() {
-                        if (content == null) {
-                            courseDetail.setHtml("<h2>该课程暂无介绍</h2>", new HtmlHttpImageGetter(courseDetail));
-                        } else {
-                            courseDetail.setHtml(content, new HtmlHttpImageGetter(courseDetail));
-                        }
+                        courseDetail.setHtml(content, new HtmlHttpImageGetter(courseDetail));
                     }
                 });
             }

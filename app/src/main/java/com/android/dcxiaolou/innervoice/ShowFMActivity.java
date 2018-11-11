@@ -102,8 +102,6 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
     private BroadcastPlayer player;
     private ImageView fmBackground;
     private TextView fmTitle, fmSpeak, fmIntroduce, fmViewNum, fmLikeNum;
-    private AudioManager.OnAudioFocusChangeListener mAudioFocusChangeListener = null;
-    private AudioManager mAudioMgr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

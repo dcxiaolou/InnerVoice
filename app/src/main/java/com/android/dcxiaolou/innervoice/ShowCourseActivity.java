@@ -49,7 +49,7 @@ public class ShowCourseActivity extends AppCompatActivity {
         courseGuides = new ArrayList<>();
         // 使用okhttp获取课程引导信息
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("http://m.xinli001.com/lesson/tagList?tag_name=free&page=1&size=20&lesson_type=normal").build();
+        Request request = new Request.Builder().url("http://bmob-cdn-22224.b0.upaiyun.com/2018/11/11/03e4f6834038a54f80124fdfb9c6555a.json").build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
