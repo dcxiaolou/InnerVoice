@@ -1,0 +1,126 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/question_item_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="2dp">
+
+    <!--问答功能模块详情页中RecyclerView的子项-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/question_user_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/question_user_img"/>
+
+            <!--android:ellipsize="end" 省略号在结尾-->
+            <TextView
+                android:id="@+id/question_title"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:lines="2"
+                android:textSize="18sp"
+                android:textColor="@color/default_text_color"
+                android:text="想结婚生孩子可偏向喜欢男人，不敢与女人交往怎么办？"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/question_tag"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/question_context"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:maxLines="5"
+                android:ellipsize="end"
+                android:textColor="@color/default_text_color"
+                android:text="自己生活的环境，大家都是异性恋，像同学群，都是晒结婚了，晒孩子了，而自己却偏偏有很大倾向喜欢男人，对男人有性冲动，从小懵懵懂懂，喜欢跟帅气的同学相处，体弱多病，很小个，做事温温柔柔的，经常被笑话说做事说话像女孩，好多次被别人说你要是女的就取你了。喜欢男人的这个心理越长大越强，也不敢跟朋友，同学讲，因为听到他们碰巧因为看到电影了电视剧里那些同性恋情节时候，嘲笑说变态了，基佬了，恶心了，也不敢和父母长辈说，他们都很传统，自己生活的环境从来没有听到有那个认识的人是同性恋的。自己又不完全是同性恋，也有喜欢女孩的部分，可是不敢去和女孩子交往，一来自己小个形象差，二来怕女孩知道自己喜欢男人还跟她交往，曾相亲多次，都看不对眼，不成功，拖来拖去，到现在快40了，没真正谈过恋爱，没成家，自己和家人很着急，如何是好？？"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:id="@+id/question_push_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/default_text_color"
+                    android:text="11小时前"/>
+
+                <TextView
+                    android:id="@+id/question_view_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/view"
+                    android:drawablePadding="5dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/default_text_color"
+                    android:text="201 阅读"/>
+
+                <TextView
+                    android:id="@+id/question_answer_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/answer"
+                    android:drawablePadding="5dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/default_text_color"
+                    android:text=" 8个回答"/>
+
+                <TextView
+                    android:id="@+id/add_question_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/add_answer"
+                    android:drawablePadding="5dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/main_color"
+                    android:text=" 去回答"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

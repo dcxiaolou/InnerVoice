@@ -35,7 +35,7 @@ public class ShowCourseIntroduceActivity extends AppCompatActivity implements Vi
 
     private RadioButton detailRb, catalogRb, commonRb;
 
-    private ViewPager viewPagerl;
+    private ViewPager viewPager;
 
     private String courseId, coverPath, courseTitle;
 
@@ -68,13 +68,13 @@ public class ShowCourseIntroduceActivity extends AppCompatActivity implements Vi
         catalogRb = (RadioButton) findViewById(R.id.rb_catalog);
         commonRb = (RadioButton) findViewById(R.id.rb_common);
 
-        viewPagerl = (ViewPager) findViewById(R.id.view_pager);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
 
         detailRb.setOnClickListener(this);
         catalogRb.setOnClickListener(this);
         commonRb.setOnClickListener(this);
 
-        viewPagerl.setOnPageChangeListener(this);
+        viewPager.setOnPageChangeListener(this);
     }
 
     private void initData() {
@@ -87,20 +87,20 @@ public class ShowCourseIntroduceActivity extends AppCompatActivity implements Vi
         fragments.add(new CourseCatalogFragment());
         fragments.add(new CourseCommonFragment());
         FragmentPagerAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
-        viewPagerl.setAdapter(adapter);
+        viewPager.setAdapter(adapter);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rb_detail:
-                viewPagerl.setCurrentItem(0);
+                viewPager.setCurrentItem(0);
             break;
             case R.id.rb_catalog:
-                viewPagerl.setCurrentItem(1);
+                viewPager.setCurrentItem(1);
             break;
             case R.id.rb_common:
-                viewPagerl.setCurrentItem(2);
+                viewPager.setCurrentItem(2);
             break;
             default:
                 break;

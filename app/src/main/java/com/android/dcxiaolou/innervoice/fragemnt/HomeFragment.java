@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import com.android.dcxiaolou.innervoice.R;
 import com.android.dcxiaolou.innervoice.ShowCourseActivity;
 import com.android.dcxiaolou.innervoice.ShowFMActivity;
+import com.android.dcxiaolou.innervoice.ShowQuestionActivity;
 import com.android.dcxiaolou.innervoice.ShowReadArticleActivity;
 import com.android.dcxiaolou.innervoice.adapter.CourseIntroduceAdapter;
 import com.android.dcxiaolou.innervoice.adapter.ReadArticleAdapter;
@@ -73,7 +74,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     private  List<ReadArticleResult> readArticleResults;
 
     //子菜单项
-    private LinearLayout readLayout, courseLayout, fmLayout;
+    private LinearLayout readLayout, courseLayout, fmLayout, questionAndAnswerLayout;
 
     // 创建view
     @Nullable
@@ -97,6 +98,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         readLayout = (LinearLayout) mRootView.findViewById(R.id.read_layout);
         courseLayout = (LinearLayout) mRootView.findViewById(R.id.course_layout);
         fmLayout = (LinearLayout) mRootView.findViewById(R.id.fm_layout);
+        questionAndAnswerLayout = (LinearLayout) mRootView.findViewById(R.id.question_and_answer_Linear_layout);
 
         // 请求后台数据 从bmob获取banner图片，并用banner展示
         requestHomeBanner();
@@ -111,6 +113,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         readLayout.setOnClickListener(this);
         courseLayout.setOnClickListener(this);
         fmLayout.setOnClickListener(this);
+        questionAndAnswerLayout.setOnClickListener(this);
 
     }
 
@@ -133,8 +136,12 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
                 mComtext.startActivity(courseIntent);
                 break;
             case R.id.fm_layout:
-                Intent intent = new Intent(mComtext, ShowFMActivity.class);
-                mComtext.startActivity(intent);
+                Intent fmIntent = new Intent(mComtext, ShowFMActivity.class);
+                mComtext.startActivity(fmIntent);
+                break;
+            case R.id.question_and_answer_Linear_layout:
+                Intent qaaIntent = new Intent(mComtext, ShowQuestionActivity.class);
+                mComtext.startActivity(qaaIntent);
                 break;
         }
     }

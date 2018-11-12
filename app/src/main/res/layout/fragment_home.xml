@@ -114,7 +114,7 @@
 
 
                     <LinearLayout
-                        android:id="@+id/technology_view"
+                        android:id="@+id/question_and_answer_Linear_layout"
                         style="@style/height_wrap_width_weight"
                         android:layout_marginLeft="1dp"
                         android:gravity="center_horizontal"

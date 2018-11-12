@@ -3,12 +3,10 @@ package com.android.dcxiaolou.innervoice.fragemnt;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,7 +110,7 @@ public class ShowReadArticleFragment2 extends Fragment {
             public void run() {
                 try {
                     Thread.sleep(1000); //停顿1s，以便获取数据
-                    showArticleItemRv = (RecyclerView) rootView.findViewById(R.id.show_article_item_rv);
+                    showArticleItemRv = (RecyclerView) rootView.findViewById(R.id.show_article_item_rv_2);
                     LinearLayoutManager manager = new LinearLayoutManager(mContext);
                     showArticleItemRv.setLayoutManager(manager);
                     ReadArticleAdapter adapter = new ReadArticleAdapter(readArticleResults);
