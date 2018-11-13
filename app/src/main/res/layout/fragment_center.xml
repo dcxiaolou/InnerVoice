@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/user_img"
-                    android:text="王宝宝"
+                    android:text="冯宝宝"
                     android:textColor="@color/gray"
                     android:textSize="18sp" />
 
