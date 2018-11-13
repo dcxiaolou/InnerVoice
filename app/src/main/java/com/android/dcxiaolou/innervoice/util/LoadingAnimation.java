@@ -24,7 +24,7 @@ public class LoadingAnimation {
                 .setHintText("Loading...")
                 .setHintTextSize(16) // 设置字体大小 dp
                 .setHintTextColor(Color.GRAY)  // 设置字体颜色
-                .setDurationTime(0.5) // 设置动画时间百分比 - 0.5倍
+                .setDurationTime(0.5) // 设置动画时间百分比 - zero.5倍
                 .setDialogBackgroundColor(Color.parseColor("#CC111111")) // 设置背景色，默认白色
                 .setCanceledOnTouchOutside(false);
         return dialog;

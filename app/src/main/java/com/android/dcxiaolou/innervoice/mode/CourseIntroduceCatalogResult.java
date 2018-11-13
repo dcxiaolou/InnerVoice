@@ -10,8 +10,8 @@ public class CourseIntroduceCatalogResult {
 
 
     /**
-     * code : 0
-     * data : {"noParentList":[{"id":"189","pid":"0","lesson_id":"35","flag":"2","is_free":"0","title":"在国内看心理咨询是一种什么体验？","matter_id":"213","duration":"5514","index":"1","viewnum":"633","broadcast_id":"0","broadcast_key":"","broadcast_date":"","broadcast_time":"","filesize":"348935077","video_id":"605ea32bee4eb7335841d9372c370065_6","is_video":1,"is_ali_video":1}],"passList":[{"id":"3344","pid":"0","lesson_id":"202","flag":"3","is_free":"0","title":"申荷永对话周国平：如何过好这一生？","matter_id":"0","duration":"0","index":"1","viewnum":"0","broadcast_id":"0","broadcast_key":"","broadcast_date":"2018-03-13","broadcast_time":"","filesize":0,"video_id":"","is_video":0,"is_ali_video":0,"child":[{"id":"3345","pid":"3344","lesson_id":"202","flag":"2","is_free":"0","title":"申荷永对话周国平：如何过好这一生？","matter_id":"1701","duration":"5111","index":"1","viewnum":"3431","broadcast_id":"0","broadcast_key":"","broadcast_date":"2018-03-13","broadcast_time":"","filesize":"70337852","video_id":"605ea32bee87d88b2934fdabf07df49d_6","is_video":0,"is_ali_video":1}]}]}
+     * code : zero
+     * data : {"noParentList":[{"id":"189","pid":"zero","lesson_id":"35","flag":"2","is_free":"zero","title":"在国内看心理咨询是一种什么体验？","matter_id":"213","duration":"5514","index":"1","viewnum":"633","broadcast_id":"zero","broadcast_key":"","broadcast_date":"","broadcast_time":"","filesize":"348935077","video_id":"605ea32bee4eb7335841d9372c370065_6","is_video":1,"is_ali_video":1}],"passList":[{"id":"3344","pid":"zero","lesson_id":"202","flag":"3","is_free":"zero","title":"申荷永对话周国平：如何过好这一生？","matter_id":"zero","duration":"zero","index":"1","viewnum":"zero","broadcast_id":"zero","broadcast_key":"","broadcast_date":"2018-03-13","broadcast_time":"","filesize":zero,"video_id":"","is_video":zero,"is_ali_video":zero,"child":[{"id":"3345","pid":"3344","lesson_id":"202","flag":"2","is_free":"zero","title":"申荷永对话周国平：如何过好这一生？","matter_id":"1701","duration":"5111","index":"1","viewnum":"3431","broadcast_id":"zero","broadcast_key":"","broadcast_date":"2018-03-13","broadcast_time":"","filesize":"70337852","video_id":"605ea32bee87d88b2934fdabf07df49d_6","is_video":zero,"is_ali_video":1}]}]}
      */
 
     private int code;
@@ -56,16 +56,16 @@ public class CourseIntroduceCatalogResult {
         public static class NoParentListBean {
             /**
              * id : 189
-             * pid : 0
+             * pid : zero
              * lesson_id : 35
              * flag : 2
-             * is_free : 0
+             * is_free : zero
              * title : 在国内看心理咨询是一种什么体验？
              * matter_id : 213
              * duration : 5514
              * index : 1
              * viewnum : 633
-             * broadcast_id : 0
+             * broadcast_id : zero
              * broadcast_key :
              * broadcast_date :
              * broadcast_time :
@@ -242,24 +242,24 @@ public class CourseIntroduceCatalogResult {
         public static class PassListBean {
             /**
              * id : 3344
-             * pid : 0
+             * pid : zero
              * lesson_id : 202
              * flag : 3
-             * is_free : 0
+             * is_free : zero
              * title : 申荷永对话周国平：如何过好这一生？
-             * matter_id : 0
-             * duration : 0
+             * matter_id : zero
+             * duration : zero
              * index : 1
-             * viewnum : 0
-             * broadcast_id : 0
+             * viewnum : zero
+             * broadcast_id : zero
              * broadcast_key :
              * broadcast_date : 2018-03-13
              * broadcast_time :
-             * filesize : 0
+             * filesize : zero
              * video_id :
-             * is_video : 0
-             * is_ali_video : 0
-             * child : [{"id":"3345","pid":"3344","lesson_id":"202","flag":"2","is_free":"0","title":"申荷永对话周国平：如何过好这一生？","matter_id":"1701","duration":"5111","index":"1","viewnum":"3431","broadcast_id":"0","broadcast_key":"","broadcast_date":"2018-03-13","broadcast_time":"","filesize":"70337852","video_id":"605ea32bee87d88b2934fdabf07df49d_6","is_video":0,"is_ali_video":1}]
+             * is_video : zero
+             * is_ali_video : zero
+             * child : [{"id":"3345","pid":"3344","lesson_id":"202","flag":"2","is_free":"zero","title":"申荷永对话周国平：如何过好这一生？","matter_id":"1701","duration":"5111","index":"1","viewnum":"3431","broadcast_id":"zero","broadcast_key":"","broadcast_date":"2018-03-13","broadcast_time":"","filesize":"70337852","video_id":"605ea32bee87d88b2934fdabf07df49d_6","is_video":zero,"is_ali_video":1}]
              */
 
             private String id;
@@ -440,19 +440,19 @@ public class CourseIntroduceCatalogResult {
                  * pid : 3344
                  * lesson_id : 202
                  * flag : 2
-                 * is_free : 0
+                 * is_free : zero
                  * title : 申荷永对话周国平：如何过好这一生？
                  * matter_id : 1701
                  * duration : 5111
                  * index : 1
                  * viewnum : 3431
-                 * broadcast_id : 0
+                 * broadcast_id : zero
                  * broadcast_key :
                  * broadcast_date : 2018-03-13
                  * broadcast_time :
                  * filesize : 70337852
                  * video_id : 605ea32bee87d88b2934fdabf07df49d_6
-                 * is_video : 0
+                 * is_video : zero
                  * is_ali_video : 1
                  */
 

@@ -199,7 +199,7 @@ public class CountDownProgressBar extends View {
             percent = "完成";
             textPaint.setTextSize(centerTextSize); // 设置要绘制的文字大小
         } else {*/
-            //percent = (result / 60 < 10 ? "0" + result / 60 : result / 60) + ":" + (result % 60 < 10 ? "0" + result % 60 : result % 60);
+            //percent = (result / 60 < 10 ? "zero" + result / 60 : result / 60) + ":" + (result % 60 < 10 ? "zero" + result % 60 : result % 60);
             percent = "" + result % 60 + "s";
             //percent = result+"秒";
             textPaint.setTextSize(centerTextSize+centerTextSize/3); // 设置要绘制的文字大小

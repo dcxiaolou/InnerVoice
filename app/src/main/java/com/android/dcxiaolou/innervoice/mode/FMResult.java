@@ -7,7 +7,7 @@ public class FMResult implements Serializable {
 
 
     /**
-     * code : 0
+     * code : zero
      * data : {"id":"22","title":"得之我幸，失之我命","cover":"https://ossimg.xinli001.com/visioncn/600x600/VCG41585307326.jpg","url":"http://ossfm.xinli001.com/itings/record/file_play/Mg/NDUxOV83NDhfMTIwMTNfMg/L3dpenphcmRhdWRpbzEvMjAxMjA3L2QyMTY2ZmJjLTZjZTItNGQ0Ni1hZDM2LTVmNzRkZjYwYTllOC5tcDM.mp3","speak":"心理FM","favnum":"1655","viewnum":"160019","background":"http://image.xinli001.com/20140519/174819f39cb0a5b97f450b.jpg","is_teacher":false,"absolute_url":"http://fm.xinli001.com/#22","url_list":[],"commentnum":"68","speak_url":"","content":"得之我幸，不得我命。用这种态度去面对，一切怨艾也不过如是而已\u2026\u2026(来自：蔷薇岛屿)","word_url":"","jingxuan_id":"2349"}
      */
 

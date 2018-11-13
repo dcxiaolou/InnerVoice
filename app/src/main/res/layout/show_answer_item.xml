@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--问答模块的问题及回答详情页中回答RecyclerView的子项-->
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/daily_best_cv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/answer_user_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/question_user_img" />
+
+            <!--android:ellipsize="end" 省略号在结尾-->
+            <TextView
+                android:id="@+id/answer_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="2"
+                android:text="Flower"
+                android:textColor="@color/default_text_color"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/answer_push_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/push_time"
+                android:drawablePadding="5dp"
+                android:layout_marginRight="10dp"
+                android:text="1小时前"
+                android:textColor="@color/default_text_color" />
+
+            <TextView
+                android:id="@+id/answer_like_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/digg"
+                android:drawablePadding="5dp"
+                android:layout_marginRight="10dp"
+                android:text="10"
+                android:textColor="@color/default_text_color" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/answer_context"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="从你的描述中，我们还是需要澄清几个问题：一因为自己的外形和个性，有被强化同性恋的倾向。二你只是从内心感觉上对男性有喜欢，并没有同性恋的经历和行为。三也有很多人是双性恋，并不妨碍结婚生子。四因为自己不自信，害怕和女孩交往，从而更加退缩。所以理清自己的思维和情感，找到适合的努力方向并去尝试，生活才会发生改变。祝顺利！"
+            android:textColor="@color/default_text_color"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

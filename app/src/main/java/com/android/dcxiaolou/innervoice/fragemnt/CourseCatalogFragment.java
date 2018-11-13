@@ -132,7 +132,7 @@ public class CourseCatalogFragment extends Fragment {
             public void run() {
                 try {
                     Thread.sleep(1000); // 让主线程停顿1s，便于获取信息
-                    // Log.d(TAG, courseIntroduceCatalogs.get(0).getTitle());
+                    // Log.d(TAG, courseIntroduceCatalogs.get(zero).getTitle());
                     courseCatalogRv = (RecyclerView) mRootView.findViewById(R.id.course_catalog_rv);
                     LinearLayoutManager manager = new LinearLayoutManager(mContext);
                     manager.setOrientation(LinearLayoutManager.VERTICAL);

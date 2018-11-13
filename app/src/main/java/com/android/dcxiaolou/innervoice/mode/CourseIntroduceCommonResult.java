@@ -10,8 +10,8 @@ public class CourseIntroduceCommonResult {
 
 
     /**
-     * code : 0
-     * data : [{"id":6363,"userId":1005642223,"userKey":"159682177783865344104","content":"留出整块的时间做深度阅读学习，很重要的是做思维导图和复盘。一个知识点反复嘴嚼和思考，才会被吸收，如同吃饭反复嘴嚼会品出味道，胃肠也吸收的好。","score":5,"zanNum":8,"isZan":0,"created":"2018-07-15","userNickname":"xinli_lesson_8gzGwL","userAvatar":"https://ossimg.xinli001.com/20180715/917d9d24a45151cbb88726bbdf70179c.jpg","collegeRateReplyVos":[{"replyId":127,"rateId":6363,"replyNickname":"壹心理学院","content":"加油，我们和你一起进步~~","status":1,"created":"2018-07-17"}]}]
+     * code : zero
+     * data : [{"id":6363,"userId":1005642223,"userKey":"159682177783865344104","content":"留出整块的时间做深度阅读学习，很重要的是做思维导图和复盘。一个知识点反复嘴嚼和思考，才会被吸收，如同吃饭反复嘴嚼会品出味道，胃肠也吸收的好。","score":5,"zanNum":8,"isZan":zero,"created":"2018-07-15","userNickname":"xinli_lesson_8gzGwL","userAvatar":"https://ossimg.xinli001.com/20180715/917d9d24a45151cbb88726bbdf70179c.jpg","collegeRateReplyVos":[{"replyId":127,"rateId":6363,"replyNickname":"壹心理学院","content":"加油，我们和你一起进步~~","status":1,"created":"2018-07-17"}]}]
      */
 
     private int code;
@@ -41,7 +41,7 @@ public class CourseIntroduceCommonResult {
          * content : 留出整块的时间做深度阅读学习，很重要的是做思维导图和复盘。一个知识点反复嘴嚼和思考，才会被吸收，如同吃饭反复嘴嚼会品出味道，胃肠也吸收的好。
          * score : 5
          * zanNum : 8
-         * isZan : 0
+         * isZan : zero
          * created : 2018-07-15
          * userNickname : xinli_lesson_8gzGwL
          * userAvatar : https://ossimg.xinli001.com/20180715/917d9d24a45151cbb88726bbdf70179c.jpg
