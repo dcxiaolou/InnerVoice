@@ -58,7 +58,10 @@
         <activity
             android:name=".ShowQuestionActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ShowQuestionAndAnswerActivity"
+        <activity
+            android:name=".ShowQuestionAndAnswerActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".LoginOrSigninActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 

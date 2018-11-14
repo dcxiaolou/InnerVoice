@@ -47,6 +47,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/log_in_or_sign_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
