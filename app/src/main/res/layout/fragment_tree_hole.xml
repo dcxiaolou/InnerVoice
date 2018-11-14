@@ -20,10 +20,10 @@
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingBottom="30dp"
-            android:paddingEnd="60dp"
-            android:paddingLeft="60dp"
-            android:paddingRight="60dp"
-            android:paddingStart="60dp" />
+            android:paddingEnd="30dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingStart="30dp" />
 
         <LinearLayout
             android:orientation="horizontal"

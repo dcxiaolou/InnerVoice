@@ -26,8 +26,10 @@
                 dc:widthProportion="1136" />
 
             <RelativeLayout
+                android:id="@+id/log_in_rl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user_default_img"
@@ -41,6 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/user_default_img"
                     android:text="未登录"
                     android:textColor="@color/gray"
@@ -51,44 +54,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_toEndOf="@+id/log_out"
                     android:layout_toRightOf="@+id/log_out"
                     android:background="@drawable/video_jump_btn_bg"
                     android:padding="3dp"
                     android:text="点击登录/注册"
                     android:textColor="@color/white" />
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/setting" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/user_img"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/user_img" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/user_img"
-                    android:text="冯宝宝"
-                    android:textColor="@color/gray"
-                    android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="30dp"

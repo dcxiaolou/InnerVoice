@@ -1,13 +1,14 @@
 package com.android.dcxiaolou.innervoice;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.app.Activity;
 
-public class LoginOrSigninActivity extends AppCompatActivity {
+public class ConsultActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_or_signin);
+        setContentView(R.layout.activity_consult);
     }
+
 }

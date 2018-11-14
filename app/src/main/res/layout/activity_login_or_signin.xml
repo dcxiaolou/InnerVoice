@@ -21,7 +21,7 @@
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/user_login_default"
+                android:id="@+id/user_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="100dp"
@@ -36,23 +36,26 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:layout_below="@+id/user_login_default">
+                android:layout_below="@+id/user_image">
 
                 <EditText
+                    android:id="@+id/phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/username"
-                    android:drawablePadding="5dp"
-                    android:hint="用户名/手机号/邮箱"
+                    android:drawablePadding="10dp"
+                    android:hint="手机号"
                     android:padding="5dp"
                     android:background="@drawable/login_bg"/>
 
                 <EditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPassword"
                     android:layout_marginTop="10dp"
                     android:drawableLeft="@drawable/password"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="10dp"
                     android:hint="密码"
                     android:padding="5dp"
                     android:background="@drawable/login_bg"/>
@@ -69,6 +72,7 @@
                 android:layout_marginRight="50dp">
 
                 <CheckBox
+                    android:id="@+id/remember_password"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -96,6 +100,7 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
+                    android:id="@+id/log_in_Tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
@@ -108,7 +113,7 @@
                     android:background="@drawable/login_bg"/>
 
                 <TextView
-                    android:id="@+id/sing_in"
+                    android:id="@+id/sing_in_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

@@ -61,8 +61,15 @@
         <activity
             android:name=".ShowQuestionAndAnswerActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".LoginOrSigninActivity"
+        <activity
+            android:name=".LogInOrSignInActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".SingInActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".ConsultActivity"
+            android:label="@string/title_activity_consult"></activity>
     </application>
 
 </manifest>

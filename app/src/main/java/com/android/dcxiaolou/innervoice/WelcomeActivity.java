@@ -55,7 +55,7 @@ public class WelcomeActivity extends Activity {
         //停顿5秒，便于主界面加载资源，避免出现黑屏
         //实现方法有Thread.sleep() handler 动画(AlphaAnimation ObjectAnimator)
         //mWelcomeIv 在哪里实现 alpha 动画效果透明 zero.7f, 1.0f 透明度变化值
-        ObjectAnimator animator = ObjectAnimator.ofFloat(mWelcomeIv, "alpha", 0.7f, 1.0f);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mWelcomeIv, "alpha", 1.0f, 1.0f);
         animator.setDuration(3000); //动画执行时间
         animator.start();
         //给动画添加监听器 在动画结束的时候跳转到主界面

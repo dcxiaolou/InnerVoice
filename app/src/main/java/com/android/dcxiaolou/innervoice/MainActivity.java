@@ -32,6 +32,9 @@ import cn.bmob.v3.Bmob;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
+    public final static String LOGIN = "log_in";
+    private boolean login = false;
+
     private ViewPager mViewPager;
 
     private RadioButton mHomeRb, mTreeHoleRb, mMessageRb, mCenterRb;
@@ -53,6 +56,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initData();
 
         permissionRequest();
+
+        login = getIntent().getBooleanExtra(LOGIN, false);
+        if (login) {
+            mViewPager.setCurrentItem(3);
+        }
+
     }
 
     private void permissionRequest() {
