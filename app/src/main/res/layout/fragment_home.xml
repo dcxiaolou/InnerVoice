@@ -79,7 +79,7 @@
                         <ImageView
                             style="@style/wrap_content"
                             android:layout_marginTop="6.7dp"
-                            android:src="@drawable/labour_icon" />
+                            android:src="@drawable/main_query" />
 
                         <TextView
                             style="@style/wrap_content"
@@ -101,7 +101,7 @@
                         <ImageView
                             style="@style/wrap_content"
                             android:layout_marginTop="7dp"
-                            android:src="@drawable/insurance_icon" />
+                            android:src="@drawable/main_read" />
 
                         <TextView
                             style="@style/wrap_content"
@@ -124,7 +124,7 @@
                         <ImageView
                             style="@style/wrap_content"
                             android:layout_marginTop="7dp"
-                            android:src="@drawable/technology_icon" />
+                            android:src="@drawable/main_question" />
 
                         <TextView
                             style="@style/wrap_content"
@@ -152,7 +152,7 @@
                             style="@style/wrap_content"
                             android:layout_marginTop="6dp"
                             android:contentDescription="@string/app_name"
-                            android:src="@drawable/equipment_icon" />
+                            android:src="@drawable/main_test" />
 
                         <TextView
                             style="@style/wrap_content"
@@ -175,7 +175,7 @@
                             style="@style/wrap_content"
                             android:layout_marginTop="7dp"
                             android:contentDescription="@string/app_name"
-                            android:src="@drawable/league_icon" />
+                            android:src="@drawable/main_course" />
 
                         <TextView
                             style="@style/wrap_content"
@@ -198,7 +198,7 @@
                             style="@style/wrap_content"
                             android:layout_marginTop="7dp"
                             android:contentDescription="@string/app_name"
-                            android:src="@drawable/cost_exchange" />
+                            android:src="@drawable/main_fm" />
 
                         <TextView
                             style="@style/wrap_content"
