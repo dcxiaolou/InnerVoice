@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.android.dcxiaolou.innervoice.ConsultActivity;
 import com.android.dcxiaolou.innervoice.R;
 import com.android.dcxiaolou.innervoice.ShowCourseActivity;
 import com.android.dcxiaolou.innervoice.ShowFMActivity;
@@ -74,7 +75,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     private  List<ReadArticleResult> readArticleResults;
 
     //子菜单项
-    private LinearLayout readLayout, courseLayout, fmLayout, questionAndAnswerLayout;
+    private LinearLayout readLayout, courseLayout, fmLayout, questionAndAnswerLayout, consultLayout;
 
     // 创建view
     @Nullable
@@ -99,6 +100,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         courseLayout = (LinearLayout) mRootView.findViewById(R.id.course_layout);
         fmLayout = (LinearLayout) mRootView.findViewById(R.id.fm_layout);
         questionAndAnswerLayout = (LinearLayout) mRootView.findViewById(R.id.question_and_answer_Linear_layout);
+        consultLayout = (LinearLayout) mRootView.findViewById(R.id.consult_linear_layout);
 
         // 请求后台数据 从bmob获取banner图片，并用banner展示
         requestHomeBanner();
@@ -114,6 +116,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         courseLayout.setOnClickListener(this);
         fmLayout.setOnClickListener(this);
         questionAndAnswerLayout.setOnClickListener(this);
+        consultLayout.setOnClickListener(this);
 
     }
 
@@ -142,6 +145,12 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
             case R.id.question_and_answer_Linear_layout:
                 Intent qaaIntent = new Intent(mComtext, ShowQuestionActivity.class);
                 mComtext.startActivity(qaaIntent);
+                break;
+            case R.id.consult_linear_layout:
+                Intent consultIntent = new Intent(mComtext, ConsultActivity.class);
+                mComtext.startActivity(consultIntent);
+                break;
+            default:
                 break;
         }
     }
