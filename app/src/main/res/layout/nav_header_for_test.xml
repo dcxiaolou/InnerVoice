@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/root_bg_color">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/default_text_color"
+        android:text="测试类型"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginRight="1dp"
+            android:drawableLeft="@drawable/selection"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp"
+            android:text="精选"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginRight="1dp"
+            android:drawableLeft="@drawable/health"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp"
+            android:text="健康"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/capacity"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp"
+            android:text="能力"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginRight="1dp"
+            android:drawableLeft="@drawable/family"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp"
+            android:text="亲子"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginRight="1dp"
+            android:drawableLeft="@drawable/emotion"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp"
+            android:text="情感"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/relationship"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp"
+            android:text="人际"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginRight="1dp"
+            android:drawableLeft="@drawable/character"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp"
+            android:text="性格"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/workplace"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp"
+            android:text="职场"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginRight="1dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text=""/>
+
+    </LinearLayout>
+
+</LinearLayout>

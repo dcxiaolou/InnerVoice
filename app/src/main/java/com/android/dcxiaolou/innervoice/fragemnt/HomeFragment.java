@@ -23,6 +23,7 @@ import com.android.dcxiaolou.innervoice.ShowCourseActivity;
 import com.android.dcxiaolou.innervoice.ShowFMActivity;
 import com.android.dcxiaolou.innervoice.ShowQuestionActivity;
 import com.android.dcxiaolou.innervoice.ShowReadArticleActivity;
+import com.android.dcxiaolou.innervoice.TestActivity;
 import com.android.dcxiaolou.innervoice.adapter.CourseIntroduceAdapter;
 import com.android.dcxiaolou.innervoice.adapter.ReadArticleAdapter;
 import com.android.dcxiaolou.innervoice.mode.ADBanner;
@@ -75,7 +76,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     private  List<ReadArticleResult> readArticleResults;
 
     //子菜单项
-    private LinearLayout readLayout, courseLayout, fmLayout, questionAndAnswerLayout, consultLayout;
+    private LinearLayout readLayout, courseLayout, fmLayout, questionAndAnswerLayout, consultLayout, testLayout;
 
     // 创建view
     @Nullable
@@ -101,6 +102,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         fmLayout = (LinearLayout) mRootView.findViewById(R.id.fm_layout);
         questionAndAnswerLayout = (LinearLayout) mRootView.findViewById(R.id.question_and_answer_Linear_layout);
         consultLayout = (LinearLayout) mRootView.findViewById(R.id.consult_linear_layout);
+        testLayout = (LinearLayout) mRootView.findViewById(R.id.test_linear_layout);
 
         // 请求后台数据 从bmob获取banner图片，并用banner展示
         requestHomeBanner();
@@ -117,6 +119,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         fmLayout.setOnClickListener(this);
         questionAndAnswerLayout.setOnClickListener(this);
         consultLayout.setOnClickListener(this);
+        testLayout.setOnClickListener(this);
 
     }
 
@@ -149,6 +152,10 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
             case R.id.consult_linear_layout:
                 Intent consultIntent = new Intent(mComtext, ConsultActivity.class);
                 mComtext.startActivity(consultIntent);
+                break;
+            case R.id.test_linear_layout:
+                Intent testIntent = new Intent(mComtext, TestActivity.class);
+                mComtext.startActivity(testIntent);
                 break;
             default:
                 break;

@@ -142,7 +142,7 @@
                     android:layout_marginTop="1dp">
 
                     <LinearLayout
-                        android:id="@+id/equipment_view"
+                        android:id="@+id/test_linear_layout"
                         style="@style/height_wrap_width_weight"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"

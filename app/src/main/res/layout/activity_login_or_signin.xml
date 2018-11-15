@@ -45,6 +45,8 @@
                     android:drawableLeft="@drawable/username"
                     android:drawablePadding="10dp"
                     android:hint="手机号"
+                    android:inputType="phone"
+                    android:maxLines="1"
                     android:padding="5dp"
                     android:background="@drawable/login_bg"/>
 

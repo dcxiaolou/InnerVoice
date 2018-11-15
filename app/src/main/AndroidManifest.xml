@@ -69,7 +69,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ConsultActivity"
-            android:label="@string/title_activity_consult"></activity>
+            android:label="@string/title_activity_consult" />
+        <activity android:name=".TestActivity"
+            android:label="心理测试"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>
