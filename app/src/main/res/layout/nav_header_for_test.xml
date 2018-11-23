@@ -90,24 +90,24 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_marginRight="1dp"
-            android:drawableLeft="@drawable/emotion"
-            android:background="@color/white"
-            android:gravity="center"
-            android:textColor="@color/default_text_color"
-            android:textSize="18sp"
-            android:text="情感"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
             android:drawableLeft="@drawable/relationship"
             android:background="@color/white"
             android:gravity="center"
             android:textColor="@color/default_text_color"
             android:textSize="18sp"
             android:text="人际"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/workplace"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="18sp"
+            android:text="职场"/>
 
     </LinearLayout>
 
@@ -135,12 +135,10 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:drawableLeft="@drawable/workplace"
-            android:background="@color/white"
+            android:layout_marginRight="1dp"
             android:gravity="center"
-            android:textColor="@color/default_text_color"
             android:textSize="18sp"
-            android:text="职场"/>
+            android:text=""/>
 
         <TextView
             android:layout_width="0dp"
