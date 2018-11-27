@@ -91,6 +91,7 @@ dependencies {
     //引入circleimageview，是图片圆形化
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
-    //引入加载动画
-    implementation 'com.zyao89:zloading:1.1.2'
+    //SmartRefreshLayout 无需混淆
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1' //没有使用特殊Header，可以不加这行
 }

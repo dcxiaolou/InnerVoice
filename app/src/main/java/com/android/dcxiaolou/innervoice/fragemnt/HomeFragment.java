@@ -33,6 +33,10 @@ import com.android.dcxiaolou.innervoice.mode.ReadArticle;
 import com.android.dcxiaolou.innervoice.mode.ReadArticleResult;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -73,7 +77,15 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     private List<CourseGuide> courseGuides;
 
     private RecyclerView dailyBestRv;
-    private  List<ReadArticleResult> readArticleResults;
+    private  List<ReadArticleResult> readArticleResults = new ArrayList<>();
+
+    private Boolean isFirstLoad = true;
+    private int skipNum = 0;
+
+    private ReadArticleAdapter readArticleAdapter;
+
+    //刷新模块
+    private SmartRefreshLayout refreshLayout;
 
     //子菜单项
     private LinearLayout readLayout, courseLayout, fmLayout, questionAndAnswerLayout, consultLayout, testLayout;
@@ -94,6 +106,9 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        refreshLayout = (SmartRefreshLayout) mRootView.findViewById(R.id.smart_refresh_layout);
+        dailyBestRv = (RecyclerView) mRootView.findViewById(R.id.daily_best);
+
         mAdBanner = (Banner) mRootView.findViewById(R.id.adbanner);
         recyclerView = (RecyclerView) mRootView.findViewById(R.id.course_recommend_rv);
 
@@ -104,14 +119,42 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         consultLayout = (LinearLayout) mRootView.findViewById(R.id.consult_linear_layout);
         testLayout = (LinearLayout) mRootView.findViewById(R.id.test_linear_layout);
 
+        readArticleAdapter = new ReadArticleAdapter(readArticleResults);
+
+        //首次加载数据
+        if (isFirstLoad) {
+            refreshLayout.autoRefresh();//首次加载启动自动刷新
+            refreshLayout.finishRefresh();//结束刷新
+            isFirstLoad = false;
+        }
+
+        //刷新模块添加下拉刷新监听
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                readArticleResults.clear();
+                // 每日精选模块 采用RecyclerView来显示
+                initDailyBest();
+                readArticleAdapter.notifyDataSetChanged();
+                refreshLayout.finishRefresh();
+            }
+        });
+
+        //刷新模块添加上拉加载更多模块
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                initDailyBest();
+                readArticleAdapter.notifyDataSetChanged();
+                refreshLayout.finishLoadmore();
+            }
+        });
+
         // 请求后台数据 从bmob获取banner图片，并用banner展示
         requestHomeBanner();
 
         // 课程推荐模块 采用RecyclerView来显示
         initCourse(); //初始化内容
-
-        // 每日精选模块 采用RecyclerView来显示
-        initDailyBest();
 
         //给子菜单项添加点击事件
         readLayout.setOnClickListener(this);
@@ -211,37 +254,51 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     }
 
     private void initCourse() {
-        courseGuides = new ArrayList<>();
-        // 使用okhttp获取课程引导信息
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("http://bmob-cdn-22224.b0.upaiyun.com/2018/11/11/03e4f6834038a54f80124fdfb9c6555a.json").build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
 
+        new Thread(new Runnable() {
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
-                //Log.d(TAG, result);
-                // 使用Gson解析返回的json信息
-                Gson gson = new Gson();
-                CourseCollect courseCollect = gson.fromJson(result, CourseCollect.class);
-                CourseGuide courseGuide;
-                for (int i = 0; i < courseCollect.getData().getItems().size(); i++) {
-                    courseGuide = new CourseGuide();
-                    courseGuide.setId(courseCollect.getData().getItems().get(i).getId());
-                    courseGuide.setTitle(courseCollect.getData().getItems().get(i).getTitle());
-                    courseGuide.setCover(courseCollect.getData().getItems().get(i).getCover());
-                    courseGuide.setJoinnum(courseCollect.getData().getItems().get(i).getJoinnum());
-                    courseGuide.setTeacherName(courseCollect.getData().getItems().get(i).getTeacherName());
-                    courseGuides.add(courseGuide);
+            public void run() {
+                try {
+                    Thread.sleep(0);
+
+                    courseGuides = new ArrayList<>();
+                    // 使用okhttp获取课程引导信息
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder().url("http://bmob-cdn-22224.b0.upaiyun.com/2018/11/11/03e4f6834038a54f80124fdfb9c6555a.json").build();
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String result = response.body().string();
+                            //Log.d(TAG, result);
+                            // 使用Gson解析返回的json信息
+                            Gson gson = new Gson();
+                            CourseCollect courseCollect = gson.fromJson(result, CourseCollect.class);
+                            CourseGuide courseGuide;
+                            for (int i = 0; i < courseCollect.getData().getItems().size(); i++) {
+                                courseGuide = new CourseGuide();
+                                courseGuide.setId(courseCollect.getData().getItems().get(i).getId());
+                                courseGuide.setTitle(courseCollect.getData().getItems().get(i).getTitle());
+                                courseGuide.setCover(courseCollect.getData().getItems().get(i).getCover());
+                                courseGuide.setJoinnum(courseCollect.getData().getItems().get(i).getJoinnum());
+                                courseGuide.setTeacherName(courseCollect.getData().getItems().get(i).getTeacherName());
+                                courseGuides.add(courseGuide);
+                            }
+
+                        }
+                    });
+                    showCourseGuide(courseGuides); // 展示内容
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-
             }
-        });
-        showCourseGuide(courseGuides); // 展示内容
+        }).start();
+
     }
 
     private void showCourseGuide(final List<CourseGuide> courseGuides) {
@@ -249,13 +306,13 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1000); // 让主线程等待1s，以便获取相关数据
-                    // Log.d(TAG, "courseGuides size = " + courseGuides.size());
+                    Thread.sleep(500); // 让主线程等待1s，以便获取相关数据
+                    Log.d(TAG, "courseGuides size = " + courseGuides.size());
                     GridLayoutManager manager = new GridLayoutManager(mComtext, 1);
                     manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recyclerView.setLayoutManager(manager);
-                    CourseIntroduceAdapter adapter = new CourseIntroduceAdapter(courseGuides);
-                    recyclerView.setAdapter(adapter);
+                    CourseIntroduceAdapter courseIntroduceAdapter = new CourseIntroduceAdapter(courseGuides);
+                    recyclerView.setAdapter(courseIntroduceAdapter);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -264,53 +321,67 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     }
 
     private void initDailyBest() {
-        readArticleResults = new ArrayList<>();
-        BmobQuery<ReadArticle> query = new BmobQuery<>();
-        query.addQueryKeys("article");
-        query.setLimit(5); // 返回5条数据
-        query.findObjects(new FindListener<ReadArticle>() {
+        new Thread(new Runnable() {
             @Override
-            public void done(List<ReadArticle> list, BmobException e) {
-                if (e == null) {
-                    Log.d(TAG, "dailyBestRv size = " + list.size());
-                    BmobFile file;
-                    for (ReadArticle readArticle : list) {
-                        file = readArticle.getBmobFile();
-                        if (file != null) {
-                            String fileUrl = file.getUrl();
-                            String fileName = file.getFilename();
-                            Log.d(TAG, fileName);
-                            // 使用okhttp获取相应得文章
-                            OkHttpClient client = new OkHttpClient();
-                            Request request = new Request.Builder().url(fileUrl).build();
-                            client.newCall(request).enqueue(new Callback() {
-                                @Override
-                                public void onFailure(Call call, IOException e) {
-                                    e.printStackTrace();
+            public void run() {
+                try {
+                    Thread.sleep(0);
+
+                    BmobQuery<ReadArticle> query = new BmobQuery<>();
+                    query.addQueryKeys("article");
+                    query.setLimit(5); // 返回5条数据
+                    query.setSkip(skipNum); //每次跳过的数据项，即分页
+                    query.order("-createdAt");
+                    query.findObjects(new FindListener<ReadArticle>() {
+                        @Override
+                        public void done(List<ReadArticle> list, BmobException e) {
+                            if (e == null) {
+                                Log.d(TAG, "dailyBestRv size = " + list.size());
+                                BmobFile file;
+                                for (ReadArticle readArticle : list) {
+                                    file = readArticle.getBmobFile();
+                                    if (file != null) {
+                                        String fileUrl = file.getUrl();
+                                        String fileName = file.getFilename();
+                                        Log.d(TAG, fileName);
+                                        // 使用okhttp获取相应得文章
+                                        OkHttpClient client = new OkHttpClient();
+                                        Request request = new Request.Builder().url(fileUrl).build();
+                                        client.newCall(request).enqueue(new Callback() {
+                                            @Override
+                                            public void onFailure(Call call, IOException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            @Override
+                                            public void onResponse(Call call, Response response) throws IOException {
+                                                String result = response.body().string();
+                                                Log.d(TAG, result);
+                                                // 使用Gson解析返回的json数据
+                                                Gson gson = new Gson();
+                                                ReadArticleResult readArticleResult = gson.fromJson(result, ReadArticleResult.class);
+                                                readArticleResults.add(readArticleResult);
+                                            }
+                                        });
+                                    } else {
+                                        Log.d(TAG, "dailyBestRv bmobFile is null");
+                                    }
                                 }
 
-                                @Override
-                                public void onResponse(Call call, Response response) throws IOException {
-                                    String result = response.body().string();
-                                    Log.d(TAG, result);
-                                    // 使用Gson解析返回的json数据
-                                    Gson gson = new Gson();
-                                    ReadArticleResult readArticleResult = gson.fromJson(result, ReadArticleResult.class);
-                                    readArticleResults.add(readArticleResult);
-                                }
-                            });
-                        } else {
-                            Log.d(TAG, "dailyBestRv bmobFile is null");
+                                showDailyBest(readArticleResults, mComtext); //展示每日精选模块
+                                skipNum += 5;
+
+                            } else {
+                                e.printStackTrace();
+                            }
                         }
-                    }
+                    });
 
-                    showDailyBest(readArticleResults, mComtext); //展示每日精选模块
-
-                } else {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        });
+        }).start();
     }
 
     private void showDailyBest(final List<ReadArticleResult> readArticleResults, final Context mContext) {
@@ -318,17 +389,15 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1000); // 让主线程等待1s，以便获取相关数据
+                    Thread.sleep(500); // 让主线程等待，以便获取相关数据
                     Log.d(TAG, "showDailyBest size = " + readArticleResults.size());
                     //采用NestedScrollView + RecyclerView （NestedScrollView代替ScrollView可解决滑动冲突问题）
-                    dailyBestRv = (RecyclerView) mRootView.findViewById(R.id.daily_best);
                     //解决触摸到RecyclerView的时候滑动有些粘连的感觉
                     dailyBestRv.setNestedScrollingEnabled(false);
                     LinearLayoutManager manager = new LinearLayoutManager(mContext);
                     manager.setOrientation(LinearLayoutManager.VERTICAL);
                     dailyBestRv.setLayoutManager(manager);
-                    ReadArticleAdapter adapter = new ReadArticleAdapter(readArticleResults);
-                    dailyBestRv.setAdapter(adapter);
+                    dailyBestRv.setAdapter(readArticleAdapter);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
