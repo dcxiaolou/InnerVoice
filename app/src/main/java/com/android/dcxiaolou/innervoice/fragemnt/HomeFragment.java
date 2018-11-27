@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.android.dcxiaolou.innervoice.ConsultActivity;
 import com.android.dcxiaolou.innervoice.R;
@@ -68,7 +69,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     private Banner mAdBanner;
 
     private View mRootView;
-    private Context mComtext;
+    private Context mContext;
     private Handler mHandler = new Handler();
 
     private List<String> bannerPathList;
@@ -81,6 +82,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
 
     private Boolean isFirstLoad = true;
     private int skipNum = 0;
+    private boolean haveMoreData = true;
 
     private ReadArticleAdapter readArticleAdapter;
 
@@ -96,7 +98,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mRootView = inflater.inflate(R.layout.fragment_home, null);
-        mComtext = getContext();
+        mContext = getContext();
 
         return mRootView;
     }
@@ -132,10 +134,13 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                readArticleResults.clear();
-                // 每日精选模块 采用RecyclerView来显示
-                initDailyBest();
-                readArticleAdapter.notifyDataSetChanged();
+                if (haveMoreData) {
+                    readArticleResults.clear();
+                    // 每日精选模块 采用RecyclerView来显示
+                    initDailyBest();
+                } else {
+                    Toast.makeText(mContext, "φ(>ω<*) 暂无更新", Toast.LENGTH_SHORT).show();
+                }
                 refreshLayout.finishRefresh();
             }
         });
@@ -144,9 +149,12 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                initDailyBest();
-                readArticleAdapter.notifyDataSetChanged();
-                refreshLayout.finishLoadmore();
+                if (haveMoreData) {
+                    initDailyBest();
+                } else {
+                    Toast.makeText(mContext, "φ(>ω<*) 没有更多文章了", Toast.LENGTH_SHORT).show();
+                }
+                refreshLayout.finishLoadMore();
             }
         });
 
@@ -177,28 +185,28 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.read_layout:
-                Intent readIntent = new Intent(mComtext, ShowReadArticleActivity.class);
-                mComtext.startActivity(readIntent);
+                Intent readIntent = new Intent(mContext, ShowReadArticleActivity.class);
+                mContext.startActivity(readIntent);
                 break;
             case R.id.course_layout:
-                Intent courseIntent = new Intent(mComtext, ShowCourseActivity.class);
-                mComtext.startActivity(courseIntent);
+                Intent courseIntent = new Intent(mContext, ShowCourseActivity.class);
+                mContext.startActivity(courseIntent);
                 break;
             case R.id.fm_layout:
-                Intent fmIntent = new Intent(mComtext, ShowFMActivity.class);
-                mComtext.startActivity(fmIntent);
+                Intent fmIntent = new Intent(mContext, ShowFMActivity.class);
+                mContext.startActivity(fmIntent);
                 break;
             case R.id.question_and_answer_Linear_layout:
-                Intent qaaIntent = new Intent(mComtext, ShowQuestionActivity.class);
-                mComtext.startActivity(qaaIntent);
+                Intent qaaIntent = new Intent(mContext, ShowQuestionActivity.class);
+                mContext.startActivity(qaaIntent);
                 break;
             case R.id.consult_linear_layout:
-                Intent consultIntent = new Intent(mComtext, ConsultActivity.class);
-                mComtext.startActivity(consultIntent);
+                Intent consultIntent = new Intent(mContext, ConsultActivity.class);
+                mContext.startActivity(consultIntent);
                 break;
             case R.id.test_linear_layout:
-                Intent testIntent = new Intent(mComtext, TestActivity.class);
-                mComtext.startActivity(testIntent);
+                Intent testIntent = new Intent(mContext, TestActivity.class);
+                mContext.startActivity(testIntent);
                 break;
             default:
                 break;
@@ -308,7 +316,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
                 try {
                     Thread.sleep(500); // 让主线程等待1s，以便获取相关数据
                     Log.d(TAG, "courseGuides size = " + courseGuides.size());
-                    GridLayoutManager manager = new GridLayoutManager(mComtext, 1);
+                    GridLayoutManager manager = new GridLayoutManager(mContext, 1);
                     manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recyclerView.setLayoutManager(manager);
                     CourseIntroduceAdapter courseIntroduceAdapter = new CourseIntroduceAdapter(courseGuides);
@@ -335,6 +343,9 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
                     query.findObjects(new FindListener<ReadArticle>() {
                         @Override
                         public void done(List<ReadArticle> list, BmobException e) {
+                            if (list.size() < 5) {
+                                haveMoreData = false;
+                            }
                             if (e == null) {
                                 Log.d(TAG, "dailyBestRv size = " + list.size());
                                 BmobFile file;
@@ -368,7 +379,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
                                     }
                                 }
 
-                                showDailyBest(readArticleResults, mComtext); //展示每日精选模块
+                                showDailyBest(readArticleResults, mContext); //展示每日精选模块
                                 skipNum += 5;
 
                             } else {
@@ -398,6 +409,8 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
                     manager.setOrientation(LinearLayoutManager.VERTICAL);
                     dailyBestRv.setLayoutManager(manager);
                     dailyBestRv.setAdapter(readArticleAdapter);
+                    readArticleAdapter.notifyDataSetChanged();//数据改变
+                    dailyBestRv.scrollToPosition(readArticleResults.size() - 5 - 1);//从新定位
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
