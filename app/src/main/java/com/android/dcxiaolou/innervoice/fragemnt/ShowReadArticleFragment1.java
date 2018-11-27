@@ -45,10 +45,11 @@ public class ShowReadArticleFragment1 extends Fragment {
 
     private final static String TAG = "Fragment1";
 
+    //标记是否是第一次加载
     private boolean isFirstLoad = true;
-
+    //bmob数据查询分页
     private int skipNum = 0;
-
+    //标记是否还有数据可以加载
     private boolean haveMoreData = true;
 
     private View rootView;
@@ -69,6 +70,18 @@ public class ShowReadArticleFragment1 extends Fragment {
         rootView = (View) inflater.inflate(R.layout.fragment_show_article_1, container, false);
         mContext = getContext();
         return rootView;
+    }
+
+    /*
+    *解决ViewPager + fragment 页面切换后数据丢失，此处是让数据在相应的页面中从新加载
+    * 注意：setUserVisibleHint方法先与onActivityCreate方法执行
+    */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        isFirstLoad = true;
+        skipNum = 0;
+        haveMoreData = true;
     }
 
     @Override
@@ -93,7 +106,6 @@ public class ShowReadArticleFragment1 extends Fragment {
                     readArticleResults.clear();
                     //从bmob获取ArticleResult
                     getArticleResultFromBmob();
-//                    adapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(mContext, "φ(>ω<*) 暂无更新", Toast.LENGTH_SHORT).show();
                 }
@@ -133,7 +145,7 @@ public class ShowReadArticleFragment1 extends Fragment {
                             if (e == null) {
                                 BmobFile file;
                                 String fileUrl;
-                                Log.d("TAG", "list.size() = " + list.size());
+                                Log.d("TAG", "fragment1 list.size() = " + list.size());
                                 if (list.size() < 5) {
                                     haveMoreData = false;
                                 }
@@ -164,6 +176,8 @@ public class ShowReadArticleFragment1 extends Fragment {
                                 showArticleItem();
                                 skipNum += 5;
 
+                                Log.d("TAG", "skipNum = " + skipNum);
+
                             } else {
                                 e.printStackTrace();
                             }
@@ -183,7 +197,7 @@ public class ShowReadArticleFragment1 extends Fragment {
             public void run() {
                 try {
                     Thread.sleep(500); //停顿，以便获取数据
-                    Log.d("TAG", "readArticleResults.size() = " + readArticleResults.size());
+                    Log.d("TAG", "fragment1 readArticleResults.size() = " + readArticleResults.size());
                     LinearLayoutManager manager = new LinearLayoutManager(mContext);
                     showArticleItemRv.setLayoutManager(manager);
                     showArticleItemRv.setAdapter(adapter);

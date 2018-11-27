@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.android.dcxiaolou.innervoice.adapter.TabLayoutMenuAdapter;
 import com.android.dcxiaolou.innervoice.fragemnt.ShowReadArticleFragment1;
@@ -48,6 +49,7 @@ public class ShowReadArticleActivity extends AppCompatActivity {
         viewPager.setAdapter(new TabLayoutMenuAdapter(fragments, strings,
                 getSupportFragmentManager(), this));
         menuTabLayout.setupWithViewPager(viewPager);
+
     }
 
     private void initData() {
