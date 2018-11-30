@@ -134,7 +134,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
         moodRb = (RadioButton) headerView.findViewById(R.id.mood_rb);
         sceneRb = (RadioButton) headerView.findViewById(R.id.scene_rb);
 
-        introduceLinearLayout = (LinearLayout) headerView.findViewById(R.id.fm_introduce);
+        introduceLinearLayout = (LinearLayout) headerView.findViewById(R.id.fm_introduce_item);
         moodLinearLayout = (LinearLayout) headerView.findViewById(R.id.fm_mood);
         sceneLinearLayout = (LinearLayout) headerView.findViewById(R.id.fm_scene);
 
@@ -266,7 +266,10 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
             }
             return true;
         } else if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && !menuOpen) {
-            android.os.Process.killProcess(android.os.Process.myPid());
+            //点击返回键事件处理
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //关掉要到的Activity中间的所有Activity
+            startActivity(intent);
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -502,6 +505,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
                     ShowIntroduce(recyclerView);
                     //初始化播放器
                     initBroadcastPlayer();
+
                 } else {
                     e.printStackTrace();
                 }
@@ -538,6 +542,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
                     tv_progress = (TextView) findViewById(R.id.tv_progress);
                     tv_total = (TextView) findViewById(R.id.tv_total);
 
+                    //对来电进行监听
                     TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
                     telephonyManager.listen(new MyPhoneListener(), PhoneStateListener.LISTEN_CALL_STATE);
 

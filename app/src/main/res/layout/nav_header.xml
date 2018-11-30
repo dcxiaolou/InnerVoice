@@ -51,7 +51,7 @@
     </RadioGroup>
 
     <include
-        android:id="@+id/fm_introduce"
+        android:id="@+id/fm_introduce_item"
         layout="@layout/fm_introduce_item" />
 
     <include android:id="@+id/fm_mood"

@@ -102,6 +102,20 @@ public class HomeFragment extends Fragment implements OnBannerListener, View.OnC
 
         return mRootView;
     }
+    /*
+    * 解决ViewGroup + Fragment页面切换，数据丢失的情况，次数采用从新加载数据的方法
+    * 注意：setUserVisibleHint方法先于onActivityCreate方法执行
+    * */
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        isFirstLoad = true;
+        haveMoreData = true;
+        skipNum = 0;
+
+    }
 
     //处理逻辑
     @Override
