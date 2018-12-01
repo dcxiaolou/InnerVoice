@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dc="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,10 +16,32 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             dc:heightProportion="5"
-            dc:widthProportion="8"
-            android:src="@drawable/broadcast_bg"/>
+            dc:widthProportion="8"/>
 
         <LinearLayout
+            android:id="@+id/z_loading_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <com.zyao89.view.zloading.ZLoadingView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:z_type="LeafBuilder"
+                app:z_color="@color/colorAccent"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="Loading..."
+                android:textColor="@android:color/holo_blue_bright"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fm_context"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +55,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="不评价别人的生活，是一个人最基本的修养"
                 android:textSize="18dp"
                 android:ellipsize="end"
                 android:maxLines="2"/>
@@ -46,7 +68,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="主播: "
                     android:textColor="@color/white"
                     android:textSize="12sp"/>
 
@@ -54,7 +75,6 @@
                     android:id="@+id/fm_speak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="素年锦时FM"
                     android:textColor="@color/white"
                     android:textSize="12sp"/>
 
@@ -65,7 +85,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="一个人最大的恶意，就是把自己的理解强加于别人，把所有的结果理所当然用自己的过程来解释，并一直认为自己是正确的。” 不评价别人是一种修养，不理会别人的评价是一种修行。"
                 android:textColor="@color/white"
                 android:textSize="14sp"/>
 
@@ -82,8 +101,7 @@
                     android:layout_marginRight="10dp"
                     android:drawableLeft="@drawable/listen_music"
                     android:drawablePadding="10dp"
-                    android:textColor="@color/white"
-                    android:text="1000"/>
+                    android:textColor="@color/white"/>
 
                 <TextView
                     android:id="@+id/fm_like_num"
@@ -91,8 +109,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/digg_white"
                     android:textColor="@color/white"
-                    android:drawablePadding="10dp"
-                    android:text="1000"/>
+                    android:drawablePadding="10dp"/>
 
             </LinearLayout>
 

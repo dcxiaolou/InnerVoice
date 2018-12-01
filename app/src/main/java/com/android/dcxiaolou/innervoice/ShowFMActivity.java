@@ -3,6 +3,7 @@ package com.android.dcxiaolou.innervoice;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -51,6 +52,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import com.android.dcxiaolou.innervoice.util.*;
+import com.zyao89.view.zloading.ZLoadingDialog;
+import com.zyao89.view.zloading.ZLoadingView;
+import com.zyao89.view.zloading.Z_TYPE;
 /*
  * FM模块详情页
  * */
@@ -103,6 +107,9 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView fmBackground;
     private TextView fmTitle, fmSpeak, fmIntroduce, fmViewNum, fmLikeNum;
 
+    private LinearLayout zLoadingLayout;
+    private LinearLayout fmContextLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +140,30 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
         introduceRb = (RadioButton) headerView.findViewById(R.id.introduce_rb);
         moodRb = (RadioButton) headerView.findViewById(R.id.mood_rb);
         sceneRb = (RadioButton) headerView.findViewById(R.id.scene_rb);
+
+        zLoadingLayout = (LinearLayout) findViewById(R.id.z_loading_layout);
+        fmContextLayout = (LinearLayout) findViewById(R.id.fm_context);
+
+        fmBackground = (ImageView) findViewById(R.id.fm_background);
+        fmTitle = (TextView) findViewById(R.id.fm_title);
+        fmSpeak = (TextView) findViewById(R.id.fm_speak);
+        fmIntroduce = (TextView) findViewById(R.id.fm_introduce);
+        fmViewNum = (TextView) findViewById(R.id.fm_view_num);
+        fmLikeNum = (TextView) findViewById(R.id.fm_like_num);
+
+        previousIv = (ImageView) findViewById(R.id.previous_iv);
+        playAndPauseIv = (ImageView) findViewById(R.id.play_pause_iv);
+        nextIv = (ImageView) findViewById(R.id.next_iv);
+
+        previousIv.setOnClickListener(new ClickEvent());
+        playAndPauseIv.setOnClickListener(new ClickEvent());
+        nextIv.setOnClickListener(new ClickEvent());
+
+        skbProgress = (SeekBar) findViewById(R.id.skbProgress);
+        skbProgress.setOnSeekBarChangeListener(new SeekBarChangeEvent());
+
+        tv_progress = (TextView) findViewById(R.id.tv_progress);
+        tv_total = (TextView) findViewById(R.id.tv_total);
 
         introduceLinearLayout = (LinearLayout) headerView.findViewById(R.id.fm_introduce_item);
         moodLinearLayout = (LinearLayout) headerView.findViewById(R.id.fm_mood);
@@ -452,65 +483,98 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    private void GetFMFromBmob(String type, String kind, final RecyclerView recyclerView) {
-
-        BmobQuery<FM> query = new BmobQuery<>();
-        query.addQueryKeys("fm");
-        query.addWhereEqualTo("type", type);
-        query.addWhereEqualTo("kind", kind);
-        query.findObjects(new FindListener<FM>() {
+    private void GetFMFromBmob(final String type, final String kind, final RecyclerView recyclerView) {
+        //先显示加载动画，再在另一个线程中（等待几秒后，否则动画会卡顿）获取数据，数据获取后关闭加载动画
+        mHandler.post(new Runnable() {
             @Override
-            public void done(List<FM> list, BmobException e) {
-                if (e == null) {
-                    int count = list.size();
-                    Log.d(TAG, "count = " + count);
-                    BmobFile file;
-                    String fileUrl;
-                    for (int i = 0; i < count; i++) {
-                        file = list.get(i).getFm();
-                        fileUrl = file.getUrl();
-                        OkHttpClient client = new OkHttpClient();
-                        Request request = new Request.Builder().url(fileUrl).build();
-                        client.newCall(request).enqueue(new Callback() {
-                            @Override
-                            public void onFailure(Call call, IOException e) {
+            public void run() {
+                try {
+                    Thread.sleep(0);
+                    //显示等待框
+                    zLoadingLayout.setVisibility(View.VISIBLE);
+                    //隐藏FM详情
+                    fmContextLayout.setVisibility(View.GONE);
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    Thread.sleep(3000); //便于加载动画的流畅，及数据的加载
+
+                    BmobQuery<FM> query = new BmobQuery<>();
+                    query.addQueryKeys("fm");
+                    query.addWhereEqualTo("type", type);
+                    query.addWhereEqualTo("kind", kind);
+                    query.findObjects(new FindListener<FM>() {
+                        @Override
+                        public void done(List<FM> list, BmobException e) {
+                            if (e == null) {
+                                int count = list.size();
+                                Log.d(TAG, "count = " + count);
+                                BmobFile file;
+                                String fileUrl;
+                                for (int i = 0; i < count; i++) {
+                                    file = list.get(i).getFm();
+                                    fileUrl = file.getUrl();
+                                    OkHttpClient client = new OkHttpClient();
+                                    Request request = new Request.Builder().url(fileUrl).build();
+                                    client.newCall(request).enqueue(new Callback() {
+                                        @Override
+                                        public void onFailure(Call call, IOException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        @Override
+                                        public void onResponse(Call call, Response response) throws IOException {
+                                            String result = response.body().string().trim();
+                                            if (result != null) {
+                                                int len = result.length();
+                                                result = result.substring(1, len - 1);
+                                                String newResult = "";
+                                                for (int i = 0; i <= result.length() - 1; i++) {
+                                                    if (result.charAt(i) == '\\' && result.charAt(i + 1) != '\\') {
+                                                        continue;
+                                                    } else {
+                                                        newResult += result.charAt(i);
+                                                    }
+                                                }
+                                                //Log.d(TAG, newResult);
+                                                Gson gson = new Gson();
+                                                FMResult fmResult = gson.fromJson(newResult, FMResult.class);
+
+                                                fmResults.add(fmResult);
+                                            }
+                                        }
+                                    });
+                                }
+
+
+                                //展示FM
+                                ShowIntroduce(recyclerView);
+                                //初始化播放器
+                                initBroadcastPlayer();
+
+                            } else {
                                 e.printStackTrace();
                             }
+                        }
+                    });
 
-                            @Override
-                            public void onResponse(Call call, Response response) throws IOException {
-                                String result = response.body().string().trim();
-                                if (result != null) {
-                                    int len = result.length();
-                                    result = result.substring(1, len - 1);
-                                    String newResult = "";
-                                    for (int i = 0; i <= result.length() - 1; i++) {
-                                        if (result.charAt(i) == '\\' && result.charAt(i + 1) != '\\') {
-                                            continue;
-                                        } else {
-                                            newResult += result.charAt(i);
-                                        }
-                                    }
-                                    //Log.d(TAG, newResult);
-                                    Gson gson = new Gson();
-                                    FMResult fmResult = gson.fromJson(newResult, FMResult.class);
-
-                                    fmResults.add(fmResult);
-                                }
-                            }
-                        });
-                    }
-
-                    //展示FM
-                    ShowIntroduce(recyclerView);
-                    //初始化播放器
-                    initBroadcastPlayer();
-
-                } else {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        });
+        }).start();
+
     }
 
 
@@ -519,28 +583,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1000);
-
-                    fmBackground = (ImageView) findViewById(R.id.fm_background);
-                    fmTitle = (TextView) findViewById(R.id.fm_title);
-                    fmSpeak = (TextView) findViewById(R.id.fm_speak);
-                    fmIntroduce = (TextView) findViewById(R.id.fm_introduce);
-                    fmViewNum = (TextView) findViewById(R.id.fm_view_num);
-                    fmLikeNum = (TextView) findViewById(R.id.fm_like_num);
-
-                    previousIv = (ImageView) findViewById(R.id.previous_iv);
-                    playAndPauseIv = (ImageView) findViewById(R.id.play_pause_iv);
-                    nextIv = (ImageView) findViewById(R.id.next_iv);
-
-                    previousIv.setOnClickListener(new ClickEvent());
-                    playAndPauseIv.setOnClickListener(new ClickEvent());
-                    nextIv.setOnClickListener(new ClickEvent());
-
-                    skbProgress = (SeekBar) findViewById(R.id.skbProgress);
-                    skbProgress.setOnSeekBarChangeListener(new SeekBarChangeEvent());
-
-                    tv_progress = (TextView) findViewById(R.id.tv_progress);
-                    tv_total = (TextView) findViewById(R.id.tv_total);
+                    Thread.sleep(500);
 
                     //对来电进行监听
                     TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -601,6 +644,11 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
                         fmViewNum.setText(viewNum);
                         fmLikeNum.setText(likeNum);
                     }
+
+                    //去除等待动画
+                    zLoadingLayout.setVisibility(View.GONE);
+                    //显示FM详情
+                    fmContextLayout.setVisibility(View.VISIBLE);
 
                     //自动播放下一首
                     player.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
