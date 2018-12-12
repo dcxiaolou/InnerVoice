@@ -40,6 +40,7 @@ public class BroadcastPlayer implements MediaPlayer.OnBufferingUpdateListener, M
     /*******************************************************
      * 通过定时器和Handler来更新进度条
      ******************************************************/
+
     TimerTask mTimerTask = new TimerTask() {
         @Override
         public void run() {
@@ -79,9 +80,11 @@ public class BroadcastPlayer implements MediaPlayer.OnBufferingUpdateListener, M
         };
     };
 
-    /**
+    /*
      * 来电话了
-     */
+     * */
+
+
     public void callIsComing() {
         if (mediaPlayer.isPlaying()) {
             playPosition = mediaPlayer.getCurrentPosition();// 获得当前播放位置
@@ -89,9 +92,11 @@ public class BroadcastPlayer implements MediaPlayer.OnBufferingUpdateListener, M
         }
     }
 
-    /**
+    /*
      * 通话结束
-     */
+     * */
+
+
     public void callIsDown() {
         if (playPosition > 0) {
             playNet(playPosition);
@@ -99,16 +104,20 @@ public class BroadcastPlayer implements MediaPlayer.OnBufferingUpdateListener, M
         }
     }
 
-    /**
+    /*
      * 播放
-     */
+     * */
+
+
     public void play() {
         playNet(0);
     }
 
-    /**
+    /*
      * 重播
-     */
+     * */
+
+
     public void replay() {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.seekTo(0);// 从开始位置开始播放音乐
@@ -117,9 +126,11 @@ public class BroadcastPlayer implements MediaPlayer.OnBufferingUpdateListener, M
         }
     }
 
-    /**
+    /*
      * 暂停
-     */
+     * */
+
+
     public boolean pause() {
         if (mediaPlayer.isPlaying()) {// 如果正在播放
             mediaPlayer.pause();// 暂停
@@ -132,10 +143,11 @@ public class BroadcastPlayer implements MediaPlayer.OnBufferingUpdateListener, M
         }
         return pause;
     }
-
-    /**
+    /*
      * 停止
-     */
+     * */
+
+
     public void stop() {
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
@@ -143,9 +155,11 @@ public class BroadcastPlayer implements MediaPlayer.OnBufferingUpdateListener, M
     }
 
     @Override
-    /**
+    /*
      * 通过onPrepared播放
-     */
+     * */
+
+
     public void onPrepared(MediaPlayer arg0) {
         arg0.start();
         Log.e("mediaPlayer", "onPrepared");
@@ -164,11 +178,12 @@ public class BroadcastPlayer implements MediaPlayer.OnBufferingUpdateListener, M
         Log.e(currentProgress + "% play", bufferingProgress + "% buffer");
     }
 
-    /**
+    /*
      * 播放音乐
      *
-     * @param playPosition
-     */
+     * @param playPosition*/
+
+
     private void playNet(int playPosition) {
         try {
             mediaPlayer.reset();// 把各项参数恢复到初始状态

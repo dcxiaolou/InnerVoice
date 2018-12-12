@@ -2,7 +2,6 @@ package com.android.dcxiaolou.innervoice;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;

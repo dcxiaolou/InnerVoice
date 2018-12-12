@@ -9,18 +9,15 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.dcxiaolou.innervoice.R;
 import com.android.dcxiaolou.innervoice.ShowFMActivity;
 import com.android.dcxiaolou.innervoice.defineUI.ProportionImageView;
 import com.android.dcxiaolou.innervoice.mode.FMResult;
-import com.android.dcxiaolou.innervoice.util.BroadcastPlayer;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -72,7 +69,7 @@ public class FMItemAdapter extends RecyclerView.Adapter<FMItemAdapter.ViewHolder
                 //Log.d(Tag, result.getData().getTitle());
                 Intent intent = new Intent(viewGroup.getContext(), ShowFMActivity.class);
                 intent.putExtra(ShowFMActivity.FM_CONTENT, result);
-                intent.putExtra(ShowFMActivity.FM_ITEMNO, position);
+                intent.putExtra(ShowFMActivity.JUMP, true);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //将处于要跳转到的活动之间的活动清除
                 viewGroup.getContext().startActivity(intent);
             }
