@@ -74,7 +74,10 @@
             android:name=".TestActivity"
             android:label="心理测试"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".PublicActivity"
+        <activity
+            android:name=".PushSecretActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".PushArticleActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 

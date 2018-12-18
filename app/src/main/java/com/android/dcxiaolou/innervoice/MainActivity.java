@@ -1,7 +1,9 @@
 package com.android.dcxiaolou.innervoice;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -10,9 +12,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
 import com.android.dcxiaolou.innervoice.adapter.FragmentAdapter;
 import com.android.dcxiaolou.innervoice.fragemnt.CenterFragment;
@@ -37,6 +43,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ViewPager mViewPager;
 
     private RadioButton mHomeRb, mTreeHoleRb, mMessageRb, mCenterRb;
+
+    private ImageView pushIv, pushCloseIv;
+
+    private RelativeLayout pushInclude;
+
+    private RadioGroup mainPageRadioPage;
+
+    private CardView pushArticleCv, pushSecretCv;
+
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +120,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMessageRb = (RadioButton) findViewById(R.id.message_rb);
         mCenterRb = (RadioButton) findViewById(R.id.center_rb);
 
+        pushIv = (ImageView) findViewById(R.id.iv_push);
+        pushCloseIv = (ImageView) findViewById(R.id.iv_push_close);
+
+        pushInclude = (RelativeLayout) findViewById(R.id.include_push);
+
+        mainPageRadioPage = (RadioGroup) findViewById(R.id.radio_group_main_page);
+
+        pushArticleCv = (CardView) findViewById(R.id.cv_push_article);
+        pushSecretCv = (CardView) findViewById(R.id.cv_push_secret);
+
         //给按钮添加监听器，在按钮点击后，页面要相应的切换
         mHomeRb.setOnClickListener(this);
         mTreeHoleRb.setOnClickListener(this);
         mMessageRb.setOnClickListener(this);
         mCenterRb.setOnClickListener(this);
+
+        pushIv.setOnClickListener(this);
+        pushCloseIv.setOnClickListener(this);
+
+        pushArticleCv.setOnClickListener(this);
+        pushSecretCv.setOnClickListener(this);
 
         //给ViewPager设置监听器，在页面滑动切换后，按钮要相应的切换
         mViewPager.setOnPageChangeListener(this);
@@ -129,6 +161,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.center_rb:
                 mViewPager.setCurrentItem(3);
+                break;
+            case R.id.iv_push:
+                pushInclude.setVisibility(View.VISIBLE);
+                mViewPager.setVisibility(View.GONE);
+                mainPageRadioPage.setVisibility(View.GONE);
+                break;
+            case R.id.iv_push_close:
+                pushInclude.setVisibility(View.GONE);
+                mViewPager.setVisibility(View.VISIBLE);
+                mainPageRadioPage.setVisibility(View.VISIBLE);
+                break;
+            case R.id.cv_push_article:
+                intent = new Intent(this, PushArticleActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.cv_push_secret:
+                intent = new Intent(this, PushSecretActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
