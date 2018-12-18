@@ -22,7 +22,6 @@ allprojects {
         //Bmob的maven仓库地址
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
 
-        //图片多选
         maven { url "https://jitpack.io" }
 
     }
