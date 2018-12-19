@@ -197,7 +197,7 @@ public class BroadcastPlayer implements MediaPlayer.OnBufferingUpdateListener, M
     }
 
     private final class MyPreparedListener implements
-            android.media.MediaPlayer.OnPreparedListener {
+            MediaPlayer.OnPreparedListener {
         private int playPosition;
 
         public MyPreparedListener(int playPosition) {

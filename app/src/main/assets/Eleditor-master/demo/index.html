@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <!-- 引入jQuery -->
+    <script src="../jquery.min.js"></script>
+
+    <script src="../webuploader.min.js"></script>
+    <!-- 插件核心 -->
+    <script src="../Eleditor.js"></script>
+
+
+    <style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body {
+		    -webkit-touch-callout: none;
+		    background-color: #fff;
+		    line-height: inherit;
+		    padding-top: 30px;
+		}
+		#contentEditor{
+			width: 100%;
+			min-height: 300px;
+			box-sizing: border-box;
+			padding: 10px;
+    		color: #444;
+		}
+		#contentEditor p{
+		    letter-spacing: 0.25px;
+		    font: 16px/25px Tahoma, Verdana, 宋体;
+		    margin: 20px 0px;
+		}
+		#contentEditor h4 {
+		    font-weight: bold;
+		    line-height: 1.333em;
+		    margin: 10px 0 20px;
+		    padding: 25px 0 0;
+		}
+		#contentEditor img{
+			width: 100%;
+			height: auto;
+			box-sizing: border-box;
+		}
+		.dempTip{
+		    border-left: 2px solid #00BCD4;
+		    padding-left: 5px;
+		    margin: 10px;
+		    font-size: 16px;
+		}
+		code{
+			white-space: pre-wrap;
+		    background: #2D2D2D;
+		    display: block;
+		    margin: 10px;
+		    border-radius: 5px;
+		    color: #fff;
+		}
+		.viewTit{
+		    color: #FF5722;
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    height: 30px;
+		    line-height: 30px;
+		    font-size: 14px;
+		    text-align: center;
+		    display: block;
+		    width: 100%;
+		    background: #FFEB3B;
+		    box-shadow: 0 0 5px;
+		}
+	</style>
+</head>
+<body id="body">
+
+<input type="file" id="file_input" style="display: none;">
+
+
+<font class="viewTit">（此编辑器仅适用移动端，chrome请按F12模拟手机设备进行浏览）</font>
+<script>
+	var ua = navigator.userAgent.toLowerCase();	;
+	if( ua.indexOf('android') >= 0 || ua.indexOf('iphone') >= 0 || ua.indexOf('ipad') >= 0 || $(window).width() <= 500 ){
+		$('.viewTit').hide();
+		$('body').css('padding-top', 0);
+	}
+
+	function complete() {
+		var context = document.getElementById('contentEditor').innerHTML;
+		//console.log(context);
+			//1，匹配出图片img标签（即匹配出所有图片），过滤其他不需要的字符
+			//2.从匹配出来的结果（img标签中）循环匹配出图片地址（即src属性）
+			// var str = "this is test string <img src=\"http:yourweb.com/test.jpg\" width='50' > 123 and the end <img src=\"所有地址也能匹配.jpg\" /> 33! <img src=\"/uploads/attached/image/20120426/20120426225658_92565.png\" alt=\"\" />"
+			/*//匹配图片（g表示匹配所有结果i表示区分大小写）
+			var imgReg = /<img.*?(?:>|\/>)/gi;
+			//匹配src属性
+			var srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+			var arr = str.match(imgReg);
+			alert('所有已成功匹配图片的数组：'+arr);
+			for (var i = 0; i < arr.length; i++) {
+			 var src = arr[i].match(srcReg);
+			 //alert(src); //src="http:yourweb.com/test.jpg",http:yourweb.com/test.jpg
+			 //获取图片地址
+			 if(src[1]){
+			  alert('已匹配的图片地址'+(i+1)+'：'+src[1]);
+			 }
+			 //当然你也可以替换src属性
+			 if (src[0]) {
+			  var t = src[1].replace(/=[\'\"]?([^\'\"]*)[\'\"]?/i, "#");
+			  alert(t);
+			 }
+			}*/
+
+			var imgReg = /<img.*?(?:>|\/>)/gi;
+			var context = context.replace(imgReg, "<img src=\"#\">");
+			return context;
+
+	}
+
+</script>
+
+<div id="contentEditor"><h1 style="text-align: center;">点击开始编辑文章</h1></div>
+
+<script>
+var contentEditor = new Eleditor({
+						el: '#contentEditor',
+						upload:{
+							server: '/',
+							formData: {
+								'token': '123123'
+							},
+							compress: false,
+							fileSizeLimit: 2
+						},
+						/*初始化完成钩子*/
+						mounted: function(){
+							/*以下是扩展插入视频的演示*/
+	 						var _videoUploader = WebUploader.create({
+													auto: true, 
+													server: '服务器地址',
+													/*按钮类就是[Eleditor-你的自定义按钮id]*/
+												    pick: $('.Eleditor-insertVideo'),
+												    duplicate: true, 
+												    resize: false,
+												    accept: {
+									    				title: 'Images', 
+									    				extensions: 'mp4',
+														mimeTypes: 'video/mp4'
+													},
+												    fileVal: 'video',
+												});
+							_videoUploader.on( 'uploadSuccess', function( _file, _call ) {
+								if( _call.status == 0 ){
+									return window.alert(_call.msg);
+								}
+								/*保存状态，以便撤销*/
+								contentEditor.saveState();
+								contentEditor.getEditNode().after(`
+									<div class='Eleditor-video-area'>
+										<video src="${_call.url}" controls="controls"></video>
+									</div>
+								`);
+								contentEditor.hideEditorControllerLayer();
+							});
+						},
+						changer: function(){
+							console.log('文档修改');
+						},
+						/*自定义按钮的例子*/
+						toolbars: [
+							'insertText',
+							'editText',
+							'insertImage',
+							'insertLink',
+							'insertHr',
+							'delete',
+							//自定义一个视频按钮
+							{
+								id: 'insertVideo',
+								// tag: 'p,img', //指定P标签操作，可不填
+								name: '插入视频',
+								handle: function(select, controll){//回调返回选择的dom对象和控制按钮对象
+									/*因为上传要提前绑定按钮到webuploader，所以这里不做上传逻辑，写在mounted*/
+									/*!!!!!!返回false编辑面板不会关掉*/
+									return false;
+								}
+							},
+			              'undo',
+			              'cancel'
+						]
+						//placeHolder: 'placeHolder设置占位符'
+					});
+</script>
+
+</body>
+</html>

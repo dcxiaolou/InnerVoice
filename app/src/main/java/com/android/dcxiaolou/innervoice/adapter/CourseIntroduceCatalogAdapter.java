@@ -51,7 +51,7 @@ public class CourseIntroduceCatalogAdapter extends RecyclerView.Adapter<CourseIn
 
     @NonNull
     @Override
-    public CourseIntroduceCatalogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         if (mContext == null)
             mContext = viewGroup.getContext();
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.course_introduce_catalog_item, viewGroup, false);
@@ -84,7 +84,7 @@ public class CourseIntroduceCatalogAdapter extends RecyclerView.Adapter<CourseIn
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseIntroduceCatalogAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         CourseIntroduceCatalog courseIntroduceCatalog = courseIntroduceCatalogs.get(i);
         viewHolder.courseTitle.setText(courseIntroduceCatalog.getTitle());
         viewHolder.courseTime.setText(courseIntroduceCatalog.getTime());

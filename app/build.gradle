@@ -3,24 +3,19 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.android.dcxiaolou.innervoicetest"
-        minSdkVersion 16
+        applicationId "com.android.dcxiaolou.innervoice"
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    //禁用aapt的审查
-    aaptOptions.cruncherEnabled = false
-    aaptOptions.useNewCruncher = false
 
+        multiDexEnabled true
+
+    }
     buildTypes {
         release {
-            buildConfigField "boolean", "LOG_DEBUG", "true"//是否输出LOG信息
-            minifyEnabled true //混淆编译
-            zipAlignEnabled true //移除无用的资源文件
-            shrinkResources true //资源压缩
-
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -42,7 +37,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
@@ -55,47 +50,35 @@ dependencies {
     implementation('com.squareup.retrofit2:retrofit:2.1.0') {
         exclude group: 'com.squareup.okhttp3'
     }
-    implementation('com.squareup.retrofit2:converter-gson:2.1.0') {
-        exclude group: 'com.google.code.gson'
-        exclude group: 'com.squareup.okhttp3'
-    }
     implementation('com.squareup.retrofit2:adapter-rxjava:2.1.0') {
         exclude group: 'io.reactivex'
         exclude group: 'com.squareup.okhttp3'
     }
-
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
-
     implementation 'com.google.code.gson:gson:2.8.5'
-
     implementation 'com.github.bumptech.glide:glide:4.8.0'
-
     // 添加html-textview外部依赖库
     implementation 'org.sufficientlysecure:html-textview:3.6'
-
     // 添加banner外部依赖库
     implementation 'com.youth.banner:banner:1.4.10'
-
     implementation 'com.android.support:recyclerview-v7:28.0.0'
-
     implementation 'com.android.support:cardview-v7:28.0.0'
-
     // GSYVideoPlayer完整版引入 注意：minSdkVersion为16 依赖重复 com.android.support:support-v4:22.2.1 android.support.v4.media.MediaDescriptionCompat
     implementation('com.shuyu:GSYVideoPlayer:6.0.1') {
         exclude group: 'com.android.support', module: 'support-v4'
     }
-
     //引入TabLayout
     implementation 'com.android.support:design:28.0.0'
-
     //引入circleimageview，是图片圆形化
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-
     //SmartRefreshLayout 无需混淆
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
-    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1' //没有使用特殊Header，可以不加这行
-
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
+    //没有使用特殊Header，可以不加这行
     //自定义Loading View 无需混淆
     implementation 'com.zyao89:zloading:1.2.0'
+
+    //分包插件 无需混淆
+    implementation 'com.android.support:multidex:1.0.3'
 
 }

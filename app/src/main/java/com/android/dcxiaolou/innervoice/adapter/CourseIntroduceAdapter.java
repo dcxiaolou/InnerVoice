@@ -48,7 +48,7 @@ public class CourseIntroduceAdapter extends RecyclerView.Adapter<CourseIntroduce
 
     @NonNull
     @Override
-    public CourseIntroduceAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.course_guide_item, viewGroup, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.courseItemCardView.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +67,7 @@ public class CourseIntroduceAdapter extends RecyclerView.Adapter<CourseIntroduce
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseIntroduceAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         CourseGuide courseGuide = courseGuides.get(i);
         Glide.with(viewHolder.itemView).load(courseGuide.getCover()).into(viewHolder.courseCover);
         viewHolder.courseText.setText(courseGuide.getTitle());

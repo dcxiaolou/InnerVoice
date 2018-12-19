@@ -50,7 +50,7 @@ public class ShowQuestionAndAnswerAdapter extends RecyclerView.Adapter<ShowQuest
 
     @NonNull
     @Override
-    public ShowQuestionAndAnswerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         if (mContext == null)
             mContext = viewGroup.getContext();
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.show_answer_item, viewGroup, false);
@@ -59,7 +59,7 @@ public class ShowQuestionAndAnswerAdapter extends RecyclerView.Adapter<ShowQuest
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShowQuestionAndAnswerAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         AnswerResult answerResult = answerResults.get(i);
         RequestOptions options = RequestOptions.circleCropTransform()
                 .diskCacheStrategy(DiskCacheStrategy.NONE) //不做磁盘缓存

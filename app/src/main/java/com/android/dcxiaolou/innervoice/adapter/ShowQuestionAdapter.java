@@ -61,7 +61,7 @@ public class ShowQuestionAdapter extends RecyclerView.Adapter<ShowQuestionAdapte
 
     @NonNull
     @Override
-    public ShowQuestionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         if (mContext == null)
             mContext = viewGroup.getContext();
         View view = LayoutInflater.from(mContext).inflate(R.layout.show_question_item, viewGroup, false);
@@ -84,7 +84,7 @@ public class ShowQuestionAdapter extends RecyclerView.Adapter<ShowQuestionAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShowQuestionAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         QuestionResult result = results.get(i);
         if (result == null) {
             Log.d("TAG", "QuestionResult is null");

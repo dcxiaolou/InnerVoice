@@ -53,7 +53,7 @@ public class ReadArticleAdapter extends RecyclerView.Adapter<ReadArticleAdapter.
 
     @NonNull
     @Override
-    public ReadArticleAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
+    public ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
         if (mContext == null)
             this.mContext = viewGroup.getContext();
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.show_article_introduce_item, viewGroup, false);
@@ -75,7 +75,7 @@ public class ReadArticleAdapter extends RecyclerView.Adapter<ReadArticleAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReadArticleAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         ReadArticleResult articleResult = readArticleResults.get(i);
         Glide.with(mContext).load(articleResult.getImage()).into(viewHolder.dailyBestImage);
         viewHolder.dailyBestTitle.setText(articleResult.getTitle());

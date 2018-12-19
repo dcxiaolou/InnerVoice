@@ -800,7 +800,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
     /*
      * 只有电话来了之后才暂停音乐的播放
      * */
-    private final class MyPhoneListener extends android.telephony.PhoneStateListener {
+    private final class MyPhoneListener extends PhoneStateListener {
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             switch (state) {

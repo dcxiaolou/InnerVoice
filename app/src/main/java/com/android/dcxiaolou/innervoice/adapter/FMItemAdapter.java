@@ -55,7 +55,7 @@ public class FMItemAdapter extends RecyclerView.Adapter<FMItemAdapter.ViewHolder
 
     @NonNull
     @Override
-    public FMItemAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
         if (mContext == null) {
             mContext = viewGroup.getContext();
         }
@@ -78,7 +78,7 @@ public class FMItemAdapter extends RecyclerView.Adapter<FMItemAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FMItemAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         FMResult fmResult = fmResults.get(i);
         Glide.with(mContext).load(fmResult.getData().getCover()).into(viewHolder.imageView);
         viewHolder.titleTv.setText(fmResult.getData().getTitle());
