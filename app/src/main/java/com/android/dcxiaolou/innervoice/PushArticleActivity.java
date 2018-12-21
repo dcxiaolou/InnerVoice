@@ -17,6 +17,7 @@ import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.dcxiaolou.innervoice.util.ImageUtil;
 import com.android.dcxiaolou.innervoice.util.ReWebChomeClient;
@@ -74,8 +75,11 @@ public class PushArticleActivity extends AppCompatActivity implements ReWebChome
         pushArticleIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(PushArticleActivity.this, "发布成功{of course not ∩( ・ω・)∩萌萌哒}", Toast.LENGTH_SHORT).show();
+                
                 // 通过Handler发送消息
-                mWebView.post(new Runnable() {
+                /*mWebView.post(new Runnable() {
                     @Override
                     public void run() {
 
@@ -154,7 +158,7 @@ public class PushArticleActivity extends AppCompatActivity implements ReWebChome
                         });
 
                     }
-                });
+                });*/
 
             }
         });

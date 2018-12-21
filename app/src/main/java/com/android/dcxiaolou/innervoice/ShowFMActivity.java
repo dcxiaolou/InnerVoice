@@ -60,7 +60,6 @@ import com.android.dcxiaolou.innervoice.util.*;
  * FM模块详情页
  * */
 
-
 public class ShowFMActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final static String TAG = "ShowFMActivity";
@@ -572,12 +571,22 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
 
     private void GetFMFromBmob(final String type, final String kind, final RecyclerView recyclerView, final List<FMResult> results) {
 
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                //等待动画
+                zLoadingLayout.setVisibility(View.VISIBLE);
+                //隐藏FM详情
+                fmContextLayout.setVisibility(View.GONE);
+            }
+        });
+
         new Thread(new Runnable() {
             @Override
             public void run() {
 
                 try {
-                    Thread.sleep(0);
+                    Thread.sleep(2000);
 
                     BmobQuery<FM> query = new BmobQuery<>();
                     query.addQueryKeys("fm");
@@ -659,7 +668,8 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1000); //便于加载动画的流畅，及数据的加载
+
+                    Thread.sleep(100); //便于加载动画的流畅，及数据的加载
 
                     //对来电进行监听
                     TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -978,7 +988,7 @@ public class ShowFMActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
 
                     Log.d(TAG, "fmResults size = " + results.size());
 

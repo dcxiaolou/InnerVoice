@@ -32,8 +32,9 @@
             <LinearLayout
                 android:id="@+id/song_list_Layout"
                 android:layout_width="match_parent"
-                android:layout_height="600px"
+                android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/corner_fm_song_list_bg"
                 android:orientation="vertical"
                 android:visibility="gone">

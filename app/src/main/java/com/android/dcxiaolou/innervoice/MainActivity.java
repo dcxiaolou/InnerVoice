@@ -14,11 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.android.dcxiaolou.innervoice.adapter.FragmentAdapter;
 import com.android.dcxiaolou.innervoice.fragemnt.CenterFragment;
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CardView pushArticleCv, pushSecretCv;
 
     private Intent intent;
+
+    private long exitTime = 0; //通过计算按键间隔时间差，实现按两次BACK键退出程序
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,5 +246,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exit() {
+
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
+
+    }
 }
